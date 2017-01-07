@@ -4,9 +4,7 @@
   "description": "An ecommerce plugin that allows users to add multiple items at once.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -w --compilers coffee:coffee-script/register",
-    "start": "(coffee --compile -o dist --watch &);./node_modules/nodemon/bin/nodemon.js ./dist/index.js",
-    "build-css": "node-sass --include-path scss scss/main.scss public/css/main.css",
+    "build-css": "node-sass --include-path scss bin/scss/main.scss public/css/main.css",
     "watch-css": "nodemon -e scss -x \"npm run build-css\""
   },
   "repository": {
