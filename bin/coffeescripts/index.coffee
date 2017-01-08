@@ -1,4 +1,4 @@
 greeting = (name) ->
 	"Hello #{name}!"
 
-console.log greeting "Marcus"
+console.log greeting "Erica Chai"
