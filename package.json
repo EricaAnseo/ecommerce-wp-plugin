@@ -12,7 +12,7 @@
     "url": "git+https://github.com/EricaAnseo/ecommerce-wp-plugin.git"
   },
   "author": "Erica Chai (20063209)",
-  "license": "ISC",
+  "license": "GPLv2",
   "bugs": {
     "url": "https://github.com/EricaAnseo/ecommerce-wp-plugin/issues"
   },
