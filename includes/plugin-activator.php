@@ -1,65 +1,83 @@
 <?php 
 
-global $simp_ec_db_version;
-$simp_ec_db_version = '1.0';
+function simp_ec_update_db_check() {
+    global $simp_ec_db_version;
+    if ( get_site_option( 'simp_ec_db_version' ) != $simp_ec_db_version ) 
+    {
+		simp_ec_db_install();    
+	}
+}
+add_action( 'plugins_loaded', 'simp_ec_update_db_check' );
 
-//table created for test purposes
-$table_name = $wpdb->prefix . "test"; 
+simp_ec_db_install();
 
-//Name of the tables used for Simplified Ecommerce Plugin
-$table_pa = $wpdb->prefix . "simp_ec_product_attribute"; 
-$table_pat = $wpdb->prefix . "simp_ec_product_attribute_type"; 
-$table_pt = $wpdb->prefix . "simp_ec_product_type"; 
-$table_pct = $wpdb->prefix . "simp_ec_product_category_type"; 
-$table_pc = $wpdb->prefix . "simp_ec_product_category"; 
-$table_pcs = $wpdb->prefix . "simp_ec_product_categories"; 
-$table_product = $wpdb->prefix . "simp_ec_product"; 
-$table_pv = $wpdb->prefix . "simp_ec_product_variable"; 
-$table_order = $wpdb->prefix . "simp_ec_order"; 
-$table_customer = $wpdb->prefix . "simp_ec_customer"; 
-
-
-
-function simp_ec_db_install () {
-	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+function simp_ec_db_install() {
+	
 	global $wpdb;
+
+	global $simp_ec_db_version;
+	$simp_ec_db_version = '1.01';
+
+	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+
+	//table created for test purposes
+	$table_name = $wpdb->prefix . "test"; 
+
+	//Name of the tables used for Simplified Ecommerce Plugin
+	$table_pa = $wpdb->prefix . "simp_ec_product_attribute"; 
+	$table_pat = $wpdb->prefix . "simp_ec_product_attribute_type"; 
+	$table_pt = $wpdb->prefix . "simp_ec_product_type"; 
+	$table_pct = $wpdb->prefix . "simp_ec_product_category_type"; 
+	$table_pc = $wpdb->prefix . "simp_ec_product_category"; 
+	$table_pcs = $wpdb->prefix . "simp_ec_product_categories"; 
+	$table_product = $wpdb->prefix . "simp_ec_product"; 
+	$table_pv = $wpdb->prefix . "simp_ec_product_variable"; 
+	$table_order = $wpdb->prefix . "simp_ec_order"; 
+	$table_customer = $wpdb->prefix . "simp_ec_customer"; 
 
 	//Defaults character set, Used to prevent ? from appearing in the tables.
 	$charset_collate = $wpdb->get_charset_collate();
 
+	//$sql[] = array;
 
 	//Test Table, ignore
-	$sql = "CREATE TABLE IF NOT EXISTS $table_name (
-	id mediumint(9) NOT NULL AUTO_INCREMENT,
-	time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-	name tinytext NOT NULL,
-	text text NOT NULL,
-	url varchar(55) DEFAULT '' NOT NULL,
-	PRIMARY KEY  (id)
+	$sql_test = "CREATE TABLE $table_name (
+		id mediumint(9) NOT NULL AUTO_INCREMENT,
+		time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		name tinytext NOT NULL,
+		text text NOT NULL,
+		url varchar(55) DEFAULT '' NOT NULL,
+		PRIMARY KEY  (id)
 	) $charset_collate;";
 
-	dbDelta( $sql );
+	dbDelta($sql_test);
 
-	//1. Product Attributes Table
-	$sql = "CREATE TABLE IF NOT EXISTS $table_pa (
+	//$wpdb->hide_errors();
+	echo $wpdb->show_errors();
+
+	$wpdb->print_error();  
+
+	/*
+	/1. Product Attributes Table - CREATED
+	$sql_pa = "CREATE TABLE IF NOT EXISTS $table_pa (
 	pattribute_id mediumint(9) NOT NULL AUTO_INCREMENT,
 	pattribute_name varchar(200) DEFAULT '' NOT NULL,
 	PRIMARY KEY  (pattribute_id)
 	) $charset_collate;";
 
-	dbDelta( $sql );
+	dbDelta( $sql_pa );
 
-	//2. Product Type Table
-	$sql = "CREATE TABLE IF NOT EXISTS $table_pt (
+	///2. Product Type Table - CREATED
+	$sql_pt = "CREATE TABLE IF NOT EXISTS $table_pt (
 	ptype_id mediumint(7) NOT NULL AUTO_INCREMENT,
 	ptype_name varchar(200) DEFAULT '' NOT NULL,
 	ptype_desc longtext DEFAULT '' NOT NULL,
 	PRIMARY KEY  (ptype_id)
 	) $charset_collate;";
 
-	dbDelta( $sql );
+	dbDelta( $sql_pt );
 
-	//3. Product Attribute Types Table
+	//3. Product Attribute Types Table - CREATED
 	$sql = "CREATE TABLE IF NOT EXISTS $table_pat (
 	ptype_id mediumint(7) NOT NULL,
 	pattribute_id mediumint(9) NOT NULL,
@@ -72,10 +90,10 @@ function simp_ec_db_install () {
 
 	//4. Product Category Table
 	$sql = "CREATE TABLE IF NOT EXISTS $table_pc (
-	pcat_id mediumint(3) NOT NULL AUTO_INCREMENT,
+	pcat_id shortint(3) NOT NULL AUTO_INCREMENT,
 	pcat_name varchar(200) NOT NULL,
-	pcat_slug varchar(200) DEFAULT '' NOT NULL
-	pcat_desc varchar(200) DEFAULT '' NOT NULL
+	pcat_slug varchar(200) DEFAULT '' NOT NULL,
+	pcat_desc varchar(200) DEFAULT '' NOT NULL,
 	pcat_url varchar(55) DEFAULT '' NOT NULL,
 	PRIMARY KEY  (pcat_id)
 	) $charset_collate;";
@@ -89,7 +107,7 @@ function simp_ec_db_install () {
 	pname text,
 	pdesc longtext, 
 	pshortdesc longtext, 
-	pprice , //Look this up! Double or number? 2.99 
+	pprice decimal(6,2),
 	PRIMARY KEY  (product_id)
 	) $charset_collate;";
 
@@ -133,7 +151,7 @@ function simp_ec_db_install () {
 
 	dbDelta( $sql );
 
-	//9. Customer Table
+	//9. Customer Table - CREATED
 	$sql = "CREATE TABLE IF NOT EXISTS $table_customer (
 	customer_id mediumint(6) NOT NULL AUTO_INCREMENT,
 	customer_name longtext,
@@ -154,11 +172,13 @@ function simp_ec_db_install () {
 	FOREIGN KEY (customer_id) REFERENCES $table_customer (customer_id)
 	) $charset_collate;";
 
-	dbDelta( $sql );
+	dbDelta( $sql );*/
 
 
 	//Storing the version of the db table
-	add_option( 'simp_ec_db_version', $simp_ec_db_version );
+	//add_option( 'simp_ec_db_version', $simp_ec_db_version );
+	
+	update_option( 'simp_ec_db_version', $simp_ec_db_version );
 
 
 }
@@ -168,8 +188,21 @@ function simp_ec_install_data() {
 	
 	$welcome_name = 'Mr. WordPress';
 	$welcome_text = 'Congratulations, you just completed the installation!';
-	
-	$table_name = $wpdb->prefix . 'test';
+
+	//table created for testing purposes
+	$table_name = $wpdb->prefix . "test"; 
+
+	//Name of the tables used for Simplified Ecommerce Plugin
+	$table_pa = $wpdb->prefix . "simp_ec_product_attribute"; 
+	$table_pat = $wpdb->prefix . "simp_ec_product_attribute_type"; 
+	$table_pt = $wpdb->prefix . "simp_ec_product_type"; 
+	$table_pct = $wpdb->prefix . "simp_ec_product_category_type"; 
+	$table_pc = $wpdb->prefix . "simp_ec_product_category"; 
+	$table_pcs = $wpdb->prefix . "simp_ec_product_categories"; 
+	$table_product = $wpdb->prefix . "simp_ec_product"; 
+	$table_pv = $wpdb->prefix . "simp_ec_product_variable"; 
+	$table_order = $wpdb->prefix . "simp_ec_order"; 
+	$table_customer = $wpdb->prefix . "simp_ec_customer";
 	
 
 	$wpdb->insert( 
@@ -182,7 +215,7 @@ function simp_ec_install_data() {
 	);
 
 	//1. Product Attributes Insert Statements
-	$wpdb->insert( 
+	/*$wpdb->insert( 
 		$table_pa, 
 		array( 
 			'pattribute_id' => 1, 
@@ -641,11 +674,11 @@ function simp_ec_install_data() {
 		array(
 			'product_id' => 1, 
 			'vproduct_id' => 1, 
-			'vproduct_name' => ,
+			'vproduct_name' => 'Product name in Pink',
 			'vproduct_price' => 34.56,
 			'vproduct_stock' => 4,
 			'vproduct_sku' => 'nn4k32',
-			'ptype_id' => '',
+			'ptype_id' => '1',
 		) 
 	);
 
@@ -668,6 +701,6 @@ function simp_ec_install_data() {
 			'product_id' => 1, 
 			'order_amount' => 1,
 		) 
-	);
+	);*/
 
 }
