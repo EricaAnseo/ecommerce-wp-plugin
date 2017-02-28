@@ -58,7 +58,7 @@ function simp_ec_db_install() {
 	$wpdb->print_error();  
 
 	/*
-	/1. Product Attributes Table - CREATED
+	//1. Product Attributes Table - CREATED
 	$sql_pa = "CREATE TABLE IF NOT EXISTS $table_pa (
 	pattribute_id mediumint(9) NOT NULL AUTO_INCREMENT,
 	pattribute_name varchar(200) DEFAULT '' NOT NULL,
@@ -88,19 +88,19 @@ function simp_ec_db_install() {
 
 	dbDelta( $sql );
 
-	//4. Product Category Table
+	//4. Product Category Table - CREATED
 	$sql = "CREATE TABLE IF NOT EXISTS $table_pc (
-	pcat_id shortint(3) NOT NULL AUTO_INCREMENT,
-	pcat_name varchar(200) NOT NULL,
+	pcat_id mediumint(3) NOT NULL AUTO_INCREMENT,
+	pcat_name text NOT NULL,
 	pcat_slug varchar(200) DEFAULT '' NOT NULL,
-	pcat_desc varchar(200) DEFAULT '' NOT NULL,
-	pcat_url varchar(55) DEFAULT '' NOT NULL,
+	pcat_desc longtext DEFAULT '' NOT NULL,
+	pcat_url text DEFAULT '' NOT NULL,
 	PRIMARY KEY  (pcat_id)
 	) $charset_collate;";
 
 	dbDelta( $sql );
 
-	//5. Product Table
+	//5. Product Table  - CREATED
 	$sql = "CREATE TABLE IF NOT EXISTS $table_product (
 	product_id mediumint(10) NOT NULL AUTO_INCREMENT,
 	product_sku text,
@@ -113,9 +113,9 @@ function simp_ec_db_install() {
 
 	dbDelta( $sql );
 
-	//6. Product Categories Table
+	//6. Product Categories Table - CREATED
 	$sql = "CREATE TABLE IF NOT EXISTS $table_pcs (
-	pcat_id mediumint(9) NOT NULL,
+	pcat_id mediumint(3) NOT NULL,
 	product_id mediumint(10) NOT NULL,
 	PRIMARY KEY  (pcat_id, product_id),
 	FOREIGN KEY (pcat_id) REFERENCES $table_pc (pcat_id),
@@ -124,10 +124,10 @@ function simp_ec_db_install() {
 
 	dbDelta( $sql );
 
-	//7. Product Category Type Table
+	//7. Product Category Type Table - CREATED
 	$sql = "CREATE TABLE IF NOT EXISTS $table_pct (
 	ptype_id mediumint(7) NOT NULL,
-	pcat_id mediumint(9) NOT NULL,
+	pcat_id mediumint(3) NOT NULL,
 	PRIMARY KEY  (ptype_id, pcat_id),
 	FOREIGN KEY (ptype_id) REFERENCES $table_pat (ptype_id),
 	FOREIGN KEY (pcat_id) REFERENCES $table_pc (pcat_id)
@@ -139,13 +139,13 @@ function simp_ec_db_install() {
 	$sql = "CREATE TABLE IF NOT EXISTS $table_pv (
 	vproduct_id mediumint(12) NOT NULL AUTO_INCREMENT,
 	vproduct_name longtext,
-	vproduct_price mediumint(10) DEFAULT '',
-	vproduct_stock int(5),
-	vproduct_sku varchar(200) DEFAULT '',
+	vproduct_price decimal(6,2),
+	vproduct_stock mediumint(5),
+	vproduct_sku varchar(200),
 	product_id mediumint(10) NOT NULL,
 	ptype_id mediumint(7) NOT NULL,
 	PRIMARY KEY  (vproduct_id),
-	FOREIGN KEY (product_id) REFERENCES $table_product (product_id)
+	FOREIGN KEY (product_id) REFERENCES $table_product (product_id),
 	FOREIGN KEY (ptype_id) REFERENCES $table_pt (ptype_id)
 	) $charset_collate;";
 
@@ -162,11 +162,11 @@ function simp_ec_db_install() {
 
 	dbDelta( $sql );
 
-	//10. Order Table
+	//10. Order Table - CREATED
 	$sql = "CREATE TABLE IF NOT EXISTS $table_order (
 	customer_id mediumint(6) NOT NULL,
 	product_id mediumint(10) NOT NULL,
-	order_amount int(7) NOT NULL,
+	order_amount shortint(7) NOT NULL,
 	PRIMARY KEY  (customer_id, product_id),
 	FOREIGN KEY (product_id) REFERENCES $table_product (product_id),
 	FOREIGN KEY (customer_id) REFERENCES $table_customer (customer_id)
