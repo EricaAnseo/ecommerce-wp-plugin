@@ -1,5 +1,5 @@
 <?php
-// Template Name: WPN Debug
+// Template Name: Test template
 
 get_header();
 

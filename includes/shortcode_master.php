@@ -5,3 +5,4 @@
 
 require_once( plugin_dir_path( __FILE__ ) . 'simp_ec_shortcodes/call_from_db.php' );
 
+?>
