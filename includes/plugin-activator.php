@@ -1,4 +1,10 @@
 <?php 
+/**
+ * @since 		1.0.0
+ * @package		Simplified_Ecommerce
+**/
+
+require_once plugin_dir_path( __FILE__ ) . 'tables/table_names.php';
 
 function simp_ec_update_db_check() {
     global $simp_ec_db_version;
@@ -18,13 +24,9 @@ function simp_ec_update_database_table() {
 }
 
 function simp_ec_db_install() {
-	
-	global $wpdb;
 
 	global $simp_ec_db_version;
 	$simp_ec_db_version = '1.01';
-
-	require_once plugin_dir_path( __FILE__ ) . 'tables/table_names.php';
 
 	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
@@ -193,23 +195,30 @@ function simp_ec_db_install() {
 register_activation_hook( __FILE__, 'simp_ec_install_data' );
 
 function simp_ec_install_data() {
+	//require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+
+	include '../../../wp-load.php';
+
 	global $wpdb;
 	
 	$welcome_name = 'Mr. WordPress';
 	$welcome_text = 'Congratulations, you just completed the installation!';
 
-	$wpdb->insert( 
-		$table_name, 
-		array( 
-			'time' => current_time( 'mysql' ), 
-			'name' => $welcome_name, 
-			'text' => $welcome_text, 
-		)   
-	);
+	if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
 
-	/*require_once plugin_dir_path( __FILE__ ) . 'insert_statements/insert_product_attributes.php';
+		$wpdb->insert( 
+			$table_name, 
+			array( 
+				'time' => current_time( 'mysql' ), 
+				'name' => $welcome_name, 
+				'text' => $welcome_text, 
+			)   
+		);
+	}
 
-	require_once plugin_dir_path( __FILE__ ) . 'insert_statements/insert_product_types.php';
+	require_once plugin_dir_path( __FILE__ ) . 'insert_statements/insert_product_attributes.php';
+
+	/*require_once plugin_dir_path( __FILE__ ) . 'insert_statements/insert_product_types.php';
 
 	require_once plugin_dir_path( __FILE__ ) . 'insert_statements/insert_product_attributes_types.php';
 
@@ -228,5 +237,7 @@ function simp_ec_install_data() {
 
 	require_once plugin_dir_path( __FILE__ ) . 'insert_statements/insert_order.php';*/
 }
+
+
 
 ?>
