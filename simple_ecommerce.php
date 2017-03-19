@@ -46,6 +46,7 @@ include_once (plugin_dir_path( __FILE__) . 'includes/product_page.php');
 include_once (plugin_dir_path( __FILE__) . 'includes/class-submenu.php');
 include_once (plugin_dir_path( __FILE__) . 'includes/class-submenu-page.php');
 include_once(plugin_dir_path( __FILE__ ) . 'includes/custom_post_types.php');
+//include_once(plugin_dir_path( __FILE__ ) . 'includes/templates/template-test.php');
 
 // Include the dependencies needed to instantiate the plugin.
 //foreach ( glob( plugin_dir_path( __FILE__ ) . 'includes/*.php' ) as $file ) {
