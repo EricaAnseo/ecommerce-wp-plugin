@@ -4,20 +4,24 @@
  * @package		Simplified_Ecommerce
 **/
 
-//require_once('../../../wp-load.php');
-
 function simp_ec_options_page()
 {
+	//including the files which has the function 
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_add_category.php');
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_add_product.php');
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_view_product.php');
+
+	//Name of the parent menu item
 	$parent_page = "simplified-ecommerce";
+
+	//Format for add_menu_page
+	//Page Title, Menu Title, Capability as user can view the menu, menu_slug, function to be called, icon of the menu item, the position of the menu item 
 
     add_menu_page(
 		'Simplified Ecommerce',
 		'Simplified Ecommerce',
 		'manage_options',
-		'simplified-ecommerce', 
+		$parent_page, 
     	'simp_ec_view_products_page_html',
     	'dashicons-carrot',
     	20
@@ -32,6 +36,9 @@ function simp_ec_options_page()
     	'dashicons-carrot',
     	20
 	);
+
+	//Format for add_submenu_page
+	//Parent Slug, Page Title, Menu Title, Capability as user can view the menu, menu_slug, function to be called 
 
 	add_submenu_page( 
 		$parent_page, 

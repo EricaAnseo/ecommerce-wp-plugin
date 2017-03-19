@@ -24,7 +24,10 @@ function simp_ec_add_category_page_html()
 						'testrate' => 7,
 						'test_time' => current_time( 'mysql' ));
 
-		$format = "%d, %s, %s";
+		$format = array('%d', '%s', '%s');
+
+		//Format for wpdb->insert
+		//table name, query as an array, the format of the data in a array
 
 		//$wpdb->prepare(
 			$wpdb->insert($table_test, $query, null);

@@ -7,12 +7,6 @@ function simp_ec_products_page_html()
         return;
     }*/ 
 
-	//if(isset($_POST['sku'])){ $sku = $_POST['sku']; } 
-	//if(isset($_POST['pdesc'])){ $pdesc = $_POST['pdesc']; } 
-	//if(isset($_POST['pshortdesc'])){ $pshortdesc = $_POST['pshortdesc']; } 
-	//if(isset($_POST['pprice'])){ $pprice = $_POST['pprice']; } 
-
-
     ?>
     <div class="wrap">
         <h2>Products</h2>
@@ -30,16 +24,10 @@ function simp_ec_products_page_html()
 			<input type="submit" value="Submit" class="button button-primary" />
 		</form>
     </div>
-    <?php
+<?php
 
     global $wpdb;
 	$table_product = $wpdb->prefix . "simp_ec_product";
-
-	if( isset($_GET['pricing']) && $_GET['pricing']){
-   //- do some magic
-	}
-
-	//$pass_validation = validate_user_data($_POST); 
 
 	if(isset($_POST['pname']) || isset($_POST['sku']) || isset($_POST['pdesc']) || isset($_POST['pshortdesc']) || isset($_POST['pprice']))	{ 
 		$pname = $_POST['pname']; 
@@ -47,10 +35,7 @@ function simp_ec_products_page_html()
 		$pdesc = $_POST["pdesc"]; 
 		$pshortdesc = $_POST["pshortdesc"]; 
 		$pprice = $_POST["pprice"]; 
-		$lastid = $wpdb->insert_id;
-
-		
-		$format = "%d, %s, %s";
+		$lastid = $wpdb->insert_id; 
 
 		$query = array('product_id' => $lastid,
 					'product_sku' => $sku,
@@ -59,7 +44,7 @@ function simp_ec_products_page_html()
 					'pshortdesc' => $pshortdesc,
 					'pprice' => $pprice);
 
-		$format = "%d, %s, %s, %s, %s, %f";
+		$format = array('%d', '%s', '%s', '%s', '%s', '%f');
 
 		//$wpdb->prepare(
 			$wpdb->insert($table_product, $query, null);
@@ -67,14 +52,6 @@ function simp_ec_products_page_html()
 		//, '');
 
 	}
-
-	//if ( $pass_validation ) {
-		//$pname=$_POST["pname"]; 
-		//$sku=$_POST["sku"]; 
-		//$pdesc=$_POST["pdesc"]; 
-		//$pshortdesc=$_POST["pshortdesc"]; 
-		//$pprice=$_POST["pprice"]; 
-	//}
 	
 }
 
