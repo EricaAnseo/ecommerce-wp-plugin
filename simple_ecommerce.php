@@ -45,7 +45,8 @@ require_once (plugin_dir_path( __FILE__) . 'includes/options_page.php' );
 include_once (plugin_dir_path( __FILE__) . 'includes/product_page.php');
 include_once (plugin_dir_path( __FILE__) . 'includes/class-submenu.php');
 include_once (plugin_dir_path( __FILE__) . 'includes/class-submenu-page.php');
-include_once(plugin_dir_path( __FILE__ ) . 'includes/custom_post_types.php');
+//include_once (plugin_dir_path( __FILE__ ) . 'includes/custom_post_types.php');
+
 //include_once(plugin_dir_path( __FILE__ ) . 'includes/templates/template-test.php');
 
 // Include the dependencies needed to instantiate the plugin.
@@ -59,13 +60,20 @@ include_once(plugin_dir_path( __FILE__ ) . 'includes/custom_post_types.php');
  * This action is documented in includes/plugin-activator.php
  */
 
+function load_custom_wp_admin_style() {
+    	wp_register_style('skeleton-css', plugin_dir_path( __FILE__ ) . '/public/Skeleton-2.0.4/css/skeleton.css' );
+		wp_register_style('skeleton-normalize-css', plugin_dir_path( __FILE__ ) . '/public/Skeleton-2.0.4/css/normalize.css' );
+        wp_enqueue_style( 'skeleton-css' );
+        wp_enqueue_style( 'skeleton-normalize-css' );
+}
 
-
+add_action( 'admin_head', 'load_custom_wp_admin_style' );
 
 function simp_ec_activate_plugin() {
 	//add_action( 'init', 'simp_ec_cpt_product' );
 
 	// Simp_Ec_Activator::activate();
+	
 
 	$new_version = '2.0.0';
 

@@ -4,11 +4,13 @@
  * @package		Simplified_Ecommerce
 **/
 
-function simp_ec_options_page()
+function simp_ec_options_page() 
 {
 	//including the files which has the function 
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_add_category.php');
+	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_add_attribute.php');
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_add_product.php');
+	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_add_product_type.php');
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_view_product.php');
 
 	//Name of the parent menu item
@@ -32,7 +34,7 @@ function simp_ec_options_page()
 		'Attribute',
 		'manage_options',
 		'simplified-ecommerce-attributes', 
-    	'simp_ec_view_products_page_html',
+    	'simp_ec_add_attribute_page_html',
     	'dashicons-carrot',
     	20
 	);
@@ -57,16 +59,18 @@ function simp_ec_options_page()
 		'add_category_sub', 
 		'simp_ec_add_category_page_html'
 	);
+
+	add_submenu_page( 
+		$parent_page, 
+		'Add Product Type', 
+		'Add Product Type', 
+		'manage_options', 
+		'add_ptype_sub', 
+		'simp_ec_product_types_page_html'
+	);
 }
 
 add_action('admin_menu', 'simp_ec_options_page');
-
-
-
-function simp_ec_view_product_attribute_page_html()
-{
-
-}
 
 
 

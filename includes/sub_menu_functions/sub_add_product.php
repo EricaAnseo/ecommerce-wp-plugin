@@ -30,14 +30,15 @@ function simp_ec_products_page_html()
 	$table_product = $wpdb->prefix . "simp_ec_product";
 
 	if(isset($_POST['pname']) || isset($_POST['sku']) || isset($_POST['pdesc']) || isset($_POST['pshortdesc']) || isset($_POST['pprice']))	{ 
-		$pname = $_POST['pname']; 
-		$sku = $_POST["sku"]; 
-		$pdesc = $_POST["pdesc"]; 
-		$pshortdesc = $_POST["pshortdesc"]; 
-		$pprice = $_POST["pprice"]; 
-		$lastid = $wpdb->insert_id; 
 
-		$query = array('product_id' => $lastid,
+		$pname = sanitize_text_field( $_POST['pname'] );
+		$sku = sanitize_text_field( $_POST['sku'] );
+		$pdesc = sanitize_text_field( $_POST['pdesc'] );
+		$pshortdesc = sanitize_text_field( $_POST['pshortdesc'] );
+		$pprice = sanitize_text_field( $_POST['pprice'] );
+		$product_id = $wpdb->insert_id; 
+
+		$query = array('product_id' => $product_id,
 					'product_sku' => $sku,
 					'pname' => $pname, 
 					'pdesc' => $pdesc,
