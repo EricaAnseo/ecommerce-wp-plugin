@@ -1,6 +1,6 @@
 <?php
 
-function simp_ec_product_types_page_html()
+function simp_ec_manage_product_types_page_html()
 {
 	global $wpdb;
 	$table_pa = $wpdb->prefix . "simp_ec_product_attribute"; 

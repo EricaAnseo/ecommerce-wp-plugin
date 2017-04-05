@@ -1,6 +1,6 @@
 <?php 
 
-function simp_ec_view_products_page_html()
+function simp_ec_manage_products_page_html()
 {
 	global $wpdb;
 	$table_product = $wpdb->prefix . "simp_ec_product"; 
@@ -10,18 +10,19 @@ function simp_ec_view_products_page_html()
 
 	$results = $wpdb->get_results($select_query );
 	$no_of_products = $wpdb->get_var( 'SELECT COUNT(*) FROM '  . $table_product);
-	$categories = $wpdb->get_results( 'SELECT * FROM ' . $table_pc);
+	$categories = $wpdb->get_results( 'SELECT * FROM ' . $table_pc . ' LIMIT 10');
 
 	?>
 
 	<div class="wrap">
-		<h1>Products</h1>
+		<h1 class="wp-heading-inline">Products</h1>
 		<table class="wp-list-table widefat fixed">
 			<thead>
 				<tr>
 					<td class="manage-column column-cb check-column">
-					<input style="display: block;" type="checkbox" name="bulk-delete[]" value="" /></td>
-					<th class="manage-column column-title column-primary"><a href="<?php the_permalink() . 'page=simplified-ecommerce?sort=name'?>">Name</a></th>
+						<input style="display: block;" type="checkbox" name="bulk-delete[]" value="" />
+					</td>
+					<th class="manage-column column-title column-primary"><a href="<?php //the_permalink() . 'page=simplified-ecommerce?sort=name'?>">Name</a></th>
 					<th><a href="#sort=name">SKU</a></th>
 					<th>Description</th>
 					<th>Short Description</th>
@@ -33,19 +34,23 @@ function simp_ec_view_products_page_html()
 			<tbody>
 <?php
 
-	if ($_GET['sort'] == 'name')
-	{
-	    $select_query .= " ORDER BY pname";
-	}
+	//if ($_GET['sort'] == 'name')
+	//{
+	//    $select_query .= " ORDER BY pname";
+	//}
 	
 
-	if($results){
+	if($results){ ?>
+
+	<form action="#checked_product" method="post" id="checked_product" name="checked_product">
+
+<?php
 
 		foreach ( $results as $product ){ 
 ?>
 			
 				<tr>
-					<td><input type="checkbox" name="bulk-delete[<?php echo $product->product_id ?>]" value="<?php echo $product->product_id ?>" /></td>
+					<td><input type="checkbox" name="bulk-delete[<?php echo $product->product_id ?>]" value="bulk-delete[<?php echo $product->product_id ?>]" /></td>
 					<td><?php echo $product->pname ?></td>
 					<td><?php echo $product->product_sku ?></td>
 					<td><?php echo $product->pdesc ?></td>
@@ -70,13 +75,29 @@ function simp_ec_view_products_page_html()
 						</form>
 					</td>
 				</tr>
-
+			</form>
 <?php 	} ?>
 
 			</tbody>
+			<tfoot>
+				<tr>
+					<td class="manage-column column-cb check-column">
+						<input style="display: block;" type="checkbox" name="bulk-delete[]" value="" />
+					</td>
+	                <th>Name</th>
+	                <th>SKU</th>
+	                <th>Description</th>
+	                <th>Short Desc</th>
+	                <th>Price</th>
+	               	<th>Category</th>
+					<th></th>
+        		</tr>
+			</tfoot>
 		</table>
 		<div class="view-product-buttons">
-			<input type="submit" name="Delete" value="Delete" class="button action" />
+			<form action="#delete_checked_product" method="post"  name="delete_checked_product">
+				<input type="submit" name="delete_checked_product_button" value="Delete" id="delete_checked_product" class="button action" />
+			</form>
 			<input type="submit" name="Update" value="Update" class="button action" />
 		</div>
 
@@ -90,7 +111,6 @@ function simp_ec_view_products_page_html()
 		
 	<p>Number of products added <?php echo $no_of_products ?></p>
 
-</div>
 
 <?php
 	if(isset($_POST['delete_product_id'])) { 
@@ -100,16 +120,34 @@ function simp_ec_view_products_page_html()
 		echo "<meta http-equiv='refresh' content='0'>";
 	}
 
-	if(isset($_POST['bulk-delete'])) { 
-		$buik_delete = $_POST['bulk-delete'];
+	if(isset($_POST['delete_checked_product_button']))
+	{
+		echo '<h2>Delete button clicked</h2>';
 
-		foreach ( $buik_delete as $product_id )
-		{
-			echo 'deleting' . $product_id ;
+		if(isset($_POST['checked_product'])) { 
+			echo '<h2>items checked</h2>';
 		}
 
+		if(isset($_POST['bulk-delete'])) { 
+		$buik_delete = $_POST['bulk-delete'];
 
+		echo '<h1>something happened</h1>';
+
+			foreach ( $buik_delete as $delete_product )
+			{
+				//if($delete_product=='checked'){
+					echo 'deleting' . $delete_product ;
+				//}
+			}
+
+
+		}
 	}
+
+
+	
+
+	echo '</div>';
 
 }
 

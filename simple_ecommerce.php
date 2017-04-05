@@ -41,8 +41,7 @@ if (!defined('SIMPLIFIED_ECOMMERCE_VERSION_NUM')) {
 require_once (plugin_dir_path( __FILE__) . 'includes/test.php');
 require_once (plugin_dir_path( __FILE__) . 'includes/shop_filter_widget.php' );
 require_once (plugin_dir_path( __FILE__) . 'includes/shortcode_master.php' );
-require_once (plugin_dir_path( __FILE__) . 'includes/options_page.php' );
-include_once (plugin_dir_path( __FILE__) . 'includes/product_page.php');
+require_once (plugin_dir_path( __FILE__) . 'includes/dashboard_menu.php' );
 include_once (plugin_dir_path( __FILE__) . 'includes/class-submenu.php');
 include_once (plugin_dir_path( __FILE__) . 'includes/class-submenu-page.php');
 //include_once (plugin_dir_path( __FILE__ ) . 'includes/custom_post_types.php');
