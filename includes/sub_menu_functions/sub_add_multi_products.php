@@ -39,7 +39,6 @@ function simp_ec_add_multi_products_html()
 	        	</thead>
 	        	<tbody>
 		<?php for ($i=0; $i< $rows; $i++){ ?>
-
 			        <tr > 
 			            <td>
 			            	<textarea id="pname" style="width: 100%; resize: none; height:70px;" type="text" name="pname[<?php echo $i ?>]" ></textarea>
@@ -80,8 +79,7 @@ function simp_ec_add_multi_products_html()
 		</form>
     </div>
 
-<?php
-
+<?php 
 		if((isset($_POST['pname'])) || (isset($_POST['sku'])) || (isset($_POST['pdesc'])) || (isset($_POST['pshortdesc'])) || (isset($_POST['pprice'])) ){
 
 			global $wpdb;

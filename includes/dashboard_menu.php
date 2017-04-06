@@ -15,6 +15,7 @@ function simp_ec_options_page()
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_manage_category.php');
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_manage_attribute.php');
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_manage_product_type.php');
+	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/settings_page.php');
 
 	//Name of the parent menu item
 	$parent_page = "simplified-ecommerce"; 
@@ -89,6 +90,15 @@ function simp_ec_options_page()
 		'manage_options', 
 		'add_ptype_sub', 
 		'simp_ec_manage_product_types_page_html'
+	);
+
+	add_submenu_page( 
+		$parent_page, 
+		'Settings', 
+		'Settings', 
+		'manage_options', 
+		'settings_page', 
+		'simp_ec_settings_page_html'
 	);
 }
 
