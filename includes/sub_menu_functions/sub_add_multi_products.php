@@ -1,31 +1,33 @@
 <?php 
 
-function simp_ec_add_multi_products_html()
+function simp_ec_add_multi_products_table_html()
 {
+	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/table_names.php');
 	$rows = 7;
 	$product = array();
-
+	$table_view = admin_url('admin.php?page=add_multiple_product_table');
+	$list_view = admin_url('adsimp_ec_containermin.php?page=add_multiple_product_list');
 ?>
-    <div class="wrap">
-        <h1 class="wp-heading-inline" style="padding-bottom:10px;">Add Products</h1>
+    <div class="wrap simp_ec_container">
+        <h1 class="wp-heading-inline"><?php echo get_admin_page_title(); ?></h1>
         <a href="" class="page-title-action">Add Products</a> 
         <span style="float:right;"> 
 	        <div class="insert-product-display" style="display:inline-block; padding-top: 18px;">
-	        	<a href="" class="page-title-action">
+	        	<a href="<?php echo $table_view; ?>" class="page-title-action">
 	        		<span class="dashicons dashicons-editor-table"></span> Table
 	        	</a>
-	        	<a href="" class="page-title-action">
+	        	<a href="<?php echo $list_view; ?>" class="page-title-action">
 	        		<span class="dashicons dashicons-editor-ul"></span> List
 	        	</a>
 	        </div>
 	        <div class="add-rows" style="display:inline-block; padding-top: 8px; padding-left: 10px;">
 	        	<input style="width:55px;" id="rows" type="number" name="number_of_rows" />
-	        	<a href="" style=" padding-top: 4px" class="page-title-action">Add Rows</a>	
+	        	<a href="" style=" padding-top: 4px;" class="page-title-action">Add Rows</a>	
 	        </div>
 	    </span>
         <hr class="wp-header-end">
 	    <form action="#add_attribute" method="post" name="add_attribute">
-			<table class="wp-list-table widefat fixed">
+			<table class="wp-list-table widefat fixed simp_ec_table_view">
 				<thead>
 					<tr>
 		                <th>Name</th>
@@ -41,7 +43,7 @@ function simp_ec_add_multi_products_html()
 		<?php for ($i=0; $i< $rows; $i++){ ?>
 			        <tr > 
 			            <td>
-			            	<textarea id="pname" style="width: 100%; resize: none; height:70px;" type="text" name="pname[<?php echo $i ?>]" ></textarea>
+			            	<textarea id="pname" class="simp_ec_textarea" type="text" name="pname[<?php echo $i ?>]" ></textarea>
 			            </td>
 			            <td>
 			            	<input id="sku" style="width: 100%;" type="text" name="sku[<?php echo $i ?>]"/>
@@ -56,10 +58,10 @@ function simp_ec_add_multi_products_html()
 			            	<textarea id="pdesc" placeholder="" style="width: 100%; height:70px;" name="pdesc[<?php echo $i ?>]"></textarea>	            
 			            </td>
 			            <td>
-			            	<textarea id="ptype"  style="width: 100%; resize: none; height:70px;" type="text" name="pname[<?php echo $i ?>]" ></textarea>
+			            	<textarea id="ptype" class="simp_ec_textarea" type="text" name="pname[<?php echo $i ?>]" ></textarea>
 			            </td>
 			            <td>
-			            	<textarea id="category"  style="width: 100%; resize: none; height:70px;" type="text" name="pname[<?php echo $i ?>]" ></textarea>
+			            	<textarea id="category" class="simp_ec_textarea" type="text" name="pname[<?php echo $i ?>]" ></textarea>
 			            </td>
 			      
 			        </tr>
@@ -82,9 +84,6 @@ function simp_ec_add_multi_products_html()
 <?php 
 		if((isset($_POST['pname'])) || (isset($_POST['sku'])) || (isset($_POST['pdesc'])) || (isset($_POST['pshortdesc'])) || (isset($_POST['pprice'])) ){
 
-			global $wpdb;
-
-			$table_product = $wpdb->prefix . "simp_ec_product";
 			$product_id = $wpdb->insert_id;
 			$pname = sanitize_text_field( $_POST['pname']);
 			$product_sku = sanitize_text_field( $_POST['sku']);

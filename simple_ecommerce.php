@@ -37,6 +37,10 @@ if (!defined('SIMPLIFIED_ECOMMERCE_VERSION_NUM')) {
 	define('SIMPLIFIED_ECOMMERCE_VERSION_NUM', '1.0.0');
 }
 
+if ( ! defined( 'SIMPLIFIED_ECOMMERCE_ROOT_PATH' ) ) {
+	define( 'SIMPLIFIED_ECOMMERCE_ROOT_PATH', plugin_dir_path( __FILE__ ) );
+}
+
 // 6/2/2017 - Used to test new features.  
 require_once (plugin_dir_path( __FILE__) . 'includes/test.php');
 require_once (plugin_dir_path( __FILE__) . 'includes/shop_filter_widget.php' );
@@ -59,20 +63,20 @@ include_once (plugin_dir_path( __FILE__) . 'includes/class-submenu-page.php');
  * This action is documented in includes/plugin-activator.php
  */
 
-function load_custom_wp_admin_style() {
-    	wp_register_style('skeleton-css', plugin_dir_path( __FILE__ ) . '/public/Skeleton-2.0.4/css/skeleton.css' );
-		wp_register_style('skeleton-normalize-css', plugin_dir_path( __FILE__ ) . '/public/Skeleton-2.0.4/css/normalize.css' );
-        wp_enqueue_style( 'skeleton-css' );
-        wp_enqueue_style( 'skeleton-normalize-css' );
+function simp_ec_load_custom_assets() {
+		wp_register_style('fluidable-grid-css', plugins_url('public/andri-fluidable-10d8026/fluidable-min.css',__FILE__ ) );
+    	wp_enqueue_style( 'fluidable-grid-css' );
+    	wp_register_style('simp-ec-custom-css', plugins_url('public/css/main.min.css',__FILE__ ) );
+    	wp_enqueue_style( 'simp-ec-custom-css' );
+    	//wp_register_style('skeleton-css', plugins_url('public/Skeleton-2.0.4/css/skeleton.css',__FILE__ ) );
+    	//wp_register_style('skeleton-normalize-css', plugins_url('public/Skeleton-2.0.4/css/skeleton.css',__FILE__ ));
+		//wp_enqueue_style( 'skeleton-css' );
+    	//wp_enqueue_style( 'skeleton-normalize-css' );
 }
 
-add_action( 'admin_head', 'load_custom_wp_admin_style' );
+add_action('admin_enqueue_scripts', 'simp_ec_load_custom_assets');
 
 function simp_ec_activate_plugin() {
-	//add_action( 'init', 'simp_ec_cpt_product' );
-
-	// Simp_Ec_Activator::activate();
-	
 
 	$new_version = '2.0.0';
 
@@ -86,7 +90,6 @@ function simp_ec_activate_plugin() {
 	$plugin = new Submenu( new Submenu_Page() );
     $plugin->init();
 
-	//$my_settings_page = new MySettingsPage();
 
     // clear the permalinks after the post type has been registered
     //flush_rewrite_rules();

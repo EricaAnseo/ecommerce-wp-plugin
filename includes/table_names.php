@@ -1,7 +1,7 @@
 <?php
 	
 	//Name of the tables used for Simplified Ecommerce Plugin
-	//global $wpdb;
+	global $wpdb;
 	$table_name = $wpdb->prefix . "test";
 	$table_pa = $wpdb->prefix . "simp_ec_product_attribute"; 
 	$table_pat = $wpdb->prefix . "simp_ec_product_attribute_type"; 

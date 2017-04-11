@@ -15,6 +15,7 @@ function simp_ec_options_page()
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_manage_category.php');
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_manage_attribute.php');
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_manage_product_type.php');
+	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_manage_stock.php');
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/settings_page.php');
 
 	//Name of the parent menu item
@@ -38,9 +39,18 @@ function simp_ec_options_page()
 
 	//add_dashboard_page( $page_title, $menu_title, $capability, $menu_slug, $function);
 
+    add_submenu_page( 
+		null, 
+		'Manage Products', 
+		'Product', 
+		'manage_options', 
+		'manage_product_sub', 
+		'simp_ec_manage_products_page_list_html' 
+	);
+
 	add_submenu_page( 
 		$parent_page, 
-		'Add Products', 
+		'Add Product', 
 		'Product', 
 		'manage_options', 
 		'add_product_sub', 
@@ -49,11 +59,20 @@ function simp_ec_options_page()
 
 	add_submenu_page( 
 		$parent_page, 
-		'Add Products', 
+		'Add Multiple Products', 
 		'Multiple Products', 
 		'manage_options', 
-		'add_multi_product_sub', 
-		'simp_ec_add_multi_products_html' 
+		'add_multiple_product_table', 
+		'simp_ec_add_multi_products_table_html' 
+	);
+
+	add_submenu_page( 
+		null, 
+		'Add Multiple Products', 
+		'Multiple Products', 
+		'manage_options', 
+		'add_multiple_product_list', 
+		'simp_ec_add_multi_products_list_html' 
 	);
 
 	add_submenu_page( 
@@ -72,6 +91,15 @@ function simp_ec_options_page()
 		'manage_options', 
 		'add_category_sub', 
 		'simp_ec_manage_category_page_html'
+	);
+
+	add_submenu_page( 
+		$parent_page, 
+		'Add Attributes', 
+		'Attributes', 
+		'manage_options', 
+		'manage_stock_sub', 
+		null
 	);
 
 	add_submenu_page( 

@@ -2,9 +2,7 @@
 
 function simp_ec_manage_products_page_html()
 {
-	global $wpdb;
-	$table_product = $wpdb->prefix . "simp_ec_product"; 
-	$table_pc = $wpdb->prefix . "simp_ec_product_category"; 
+	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/table_names.php');
 
 	$select_query = 'SELECT * FROM ' . $table_product;
 
@@ -15,7 +13,7 @@ function simp_ec_manage_products_page_html()
 	?>
 
 	<div class="wrap">
-		<h1 class="wp-heading-inline">Products</h1>
+		<h1 class="wp-heading-inline"><?php echo get_admin_page_title(); ?></h1>
 		<table class="wp-list-table widefat fixed">
 			<thead>
 				<tr>
@@ -24,8 +22,8 @@ function simp_ec_manage_products_page_html()
 					</td>
 					<th class="manage-column column-title column-primary"><a href="<?php //the_permalink() . 'page=simplified-ecommerce?sort=name'?>">Name</a></th>
 					<th><a href="#sort=name">SKU</a></th>
-					<th>Description</th>
 					<th>Short Description</th>
+					<th>Description</th>
 					<th>Price</th>
 					<th>Category</th>
 					<th></th>
@@ -53,8 +51,8 @@ function simp_ec_manage_products_page_html()
 					<td><input type="checkbox" name="bulk-delete[<?php echo $product->product_id ?>]" value="bulk-delete[<?php echo $product->product_id ?>]" /></td>
 					<td><?php echo $product->pname ?></td>
 					<td><?php echo $product->product_sku ?></td>
-					<td><?php echo $product->pdesc ?></td>
 					<td><?php echo $product->pshortdesc ?></td>
+					<td><?php echo $product->pdesc ?></td>
 					<td><?php echo $product->pprice ?></td>
 					<td>
 						<select>
@@ -63,7 +61,6 @@ function simp_ec_manage_products_page_html()
 						foreach ( $categories as $category ){
 							echo '<option value="' . $category->pcat_id . '">' . $category->pcat_name . '</option>';
 						}
-
 ?>						
 						</select>
 
@@ -86,8 +83,8 @@ function simp_ec_manage_products_page_html()
 					</td>
 	                <th>Name</th>
 	                <th>SKU</th>
+	                <th>Short Description</th>
 	                <th>Description</th>
-	                <th>Short Desc</th>
 	                <th>Price</th>
 	               	<th>Category</th>
 					<th></th>

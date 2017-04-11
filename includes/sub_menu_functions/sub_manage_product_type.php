@@ -2,18 +2,15 @@
 
 function simp_ec_manage_product_types_page_html()
 {
-	global $wpdb;
-	$table_pa = $wpdb->prefix . "simp_ec_product_attribute"; 
-	$table_pat = $wpdb->prefix . "simp_ec_product_attribute_type"; 
-	$table_pt = $wpdb->prefix . "simp_ec_product_type"; 
+	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/table_names.php'); 
 
 	$results = $wpdb->get_results( 'SELECT * FROM ' . $table_pa);
 	$no_of_products = $wpdb->get_var( 'SELECT COUNT(*) FROM '  . $table_pa);
 
 ?>
 
-<div class="wrap">
-	<h1>Product Types and Attributes</h1>
+<div class="wrap simp_ec_container">
+	<h1><?php echo get_admin_page_title(); ?></h1>
 		<form action="#add_product_types_attributes" method="post" name="add_product">
 				<label for="ptype_name">Product Type Name</label> 
 				<input id="ptype_name" type="text" name="ptype_name" /> <hr/>

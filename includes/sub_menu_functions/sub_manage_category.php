@@ -2,13 +2,12 @@
 
 function simp_ec_manage_category_page_html()
 {
-	global $wpdb;
-	$table_pc = $wpdb->prefix . "simp_ec_product_category"; 
+	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/table_names.php');
 
 	$results = $wpdb->get_results( 'SELECT * FROM ' . $table_pc); ?>
 
-	<div class="wrap">
-    	<h2>Product Categories</h2>
+	<div class="wrap simp_ec_container">
+    	<h1><?php echo get_admin_page_title(); ?></h1>
     		<table class="wp-list-table widefat fixed">
     			<thead>
 	    			<tr>

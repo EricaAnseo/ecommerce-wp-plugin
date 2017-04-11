@@ -8,21 +8,41 @@ function simp_ec_products_page_html()
     }*/ 
 
     ?>
-    <div class="wrap">
-        <h2>Products</h2>
+    <div class="wrap simp_ec_container">
+        <h1><?php echo get_admin_page_title(); ?></h1>
+    	<div class="simp_ec_add_single_product">
 	        <form action="#add_product" method="post" name="add_product">
-				<label for="pname">Product Name</label> 
-				<input id="pname" type="text" name="pname" /> <hr/>
-				<label for="sku">SKU</label>
-				<input id="sku" type="text" name="sku"/><hr/>
-				<label for="pdesc">Description</label>
-				<input id="pdesc" type="text" name="pdesc" /><hr/>
-				<label for="pshortdesc">Short Description</label> 
-				<input id="pshortdesc" type="text" name="pshortdesc" /><hr/>
-				<label for="pprice">Price</label>
-				<input id="pprice" type="number" name="pprice" /><hr/>
-			<input type="submit" value="Submit" class="button button-primary" />
-		</form>
+				<div class="col-group">
+	                <span class="col-dt-6">
+	                	<input id="pname" placeholder="Product Name" style="width: 100%; resize: none; " type="text" name="pname" ></textarea>
+	                </span>
+	                <span class="col-dt-3">
+	            		<input id="sku" placeholder="SKU" style="width: 100%;" type="text" name="sku"/>
+	            	</span>
+	            	<span class="col-dt-3">
+	            		<input id="pprice" placeholder="Price" style="" min="0" placeholder="0" type="number" name="pprice" />
+	            	</span>
+		        </div>
+	            <div class="col-group">
+	            	<span class="col-dt-6">
+	            		<textarea id="pshortdesc" placeholder="Short Description" style="width: 100%; height:70px;" type="text" name="pshortdesc"></textarea>
+	            	</span>			         
+	            	<span class="col-dt-6">
+	            		<textarea id="pdesc" placeholder="Description" style="width: 100%; height:70px;" name="pdesc"></textarea>
+	            	</span>	            
+	            </div>
+	            <div class="col-group">
+	            	<span class="col-dt-4">
+	            		<textarea id="ptype" placeholder="Product Type" class="simp_ec_textarea" type="text" name="ptype" ></textarea>
+	            	</span>
+	            	<span class="col-dt-4">
+	            		<textarea id="category" placeholder="Category" class="simp_ec_textarea" type="text" name="category" ></textarea>
+	            	</span>
+	            	<span class="col-dt-4"></span>
+	            </div>
+				<input type="submit" value="Submit" class="button button-primary" />
+			</form>
+		</div>
     </div>
 <?php
 
