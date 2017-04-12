@@ -9,8 +9,7 @@ function simp_ec_options_page()
 	//including the files which has the function 
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_manage_product.php');
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_add_product.php');	
-	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_add_multi_products.php');
-	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_add_multi_products_list.php');
+	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_add_multi_products_master.php');
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_manage_variable_products.php');
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_manage_category.php');
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_manage_attribute.php');
@@ -40,6 +39,14 @@ function simp_ec_options_page()
 	//add_dashboard_page( $page_title, $menu_title, $capability, $menu_slug, $function);
 
     add_submenu_page( 
+		$parent_page, 
+		'Simplified Ecommerce', 
+		'All Products', 
+		'manage_options',  
+		$parent_page 
+	);
+
+    add_submenu_page( 
 		null, 
 		'Manage Products', 
 		'Product', 
@@ -62,17 +69,8 @@ function simp_ec_options_page()
 		'Add Multiple Products', 
 		'Multiple Products', 
 		'manage_options', 
-		'add_multiple_product_table', 
-		'simp_ec_add_multi_products_table_html' 
-	);
-
-	add_submenu_page( 
-		null, 
-		'Add Multiple Products', 
-		'Multiple Products', 
-		'manage_options', 
-		'add_multiple_product_list', 
-		'simp_ec_add_multi_products_list_html' 
+		'add_multiple_product', 
+		'simp_ec_add_multiple_products_html' 
 	);
 
 	add_submenu_page( 

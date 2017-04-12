@@ -1,5 +1,8 @@
 <?php 
 /**
+ * @since 		1.0.0
+ * @package		Simplified_Ecommerce
+ * 
  * This file will call all of the shortcodes. 
 */
 

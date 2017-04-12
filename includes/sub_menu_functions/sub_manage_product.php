@@ -1,4 +1,8 @@
 <?php 
+/**
+ * @since 		1.0.0
+ * @package		Simplified_Ecommerce
+**/
 
 function simp_ec_manage_products_page_html()
 {
@@ -12,7 +16,7 @@ function simp_ec_manage_products_page_html()
 
 	?>
 
-	<div class="wrap">
+	<div class="wrap simp_ec_container">
 		<h1 class="wp-heading-inline"><?php echo get_admin_page_title(); ?></h1>
 		<table class="wp-list-table widefat fixed">
 			<thead>

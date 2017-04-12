@@ -1,4 +1,8 @@
 <?php
+/**
+ * @since 		1.0.0
+ * @package		Simplified_Ecommerce
+**/
 
 function simp_ec_manage_product_types_page_html()
 {

@@ -1,4 +1,8 @@
 <?php
+/**
+ * @since 		1.0.0
+ * @package		Simplified_Ecommerce
+**/
 
 function simp_ec_products_page_html()
 {
