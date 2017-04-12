@@ -21,7 +21,7 @@
 <?php for ($i=0; $i< $rows; $i++){ ?>
         <tr > 
             <td>
-            	<textarea id="pname" class="simp_ec_textarea" type="text" name="pname[<?php echo $i ?>]" ></textarea>
+      	     <textarea id="pname" class="simp_ec_textarea" type="text" name="pname[<?php echo $i ?>]" ></textarea>
             </td>
             <td>
             	<input id="sku" style="width: 100%;" type="text" name="sku[<?php echo $i ?>]"/>
