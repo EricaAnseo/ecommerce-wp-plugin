@@ -46,15 +46,6 @@ function simp_ec_options_page()
 		$parent_page 
 	);
 
-    add_submenu_page( 
-		null, 
-		'Manage Products', 
-		'Product', 
-		'manage_options', 
-		'manage_product_sub', 
-		'simp_ec_manage_products_page_list_html' 
-	);
-
 	add_submenu_page( 
 		$parent_page, 
 		'Add Product', 
@@ -75,38 +66,20 @@ function simp_ec_options_page()
 
 	add_submenu_page( 
 		$parent_page, 
-		'Variable Product', 
+		'Variable Products', 
 		'Variable Products', 
 		'manage_options', 
-		'add_variable_product_sub', 
-		'simp_ec_add_variable_products_html' 
+		'manage_variable_product', 
+		'simp_ec_manage_variable_products_html' 
 	);
 
 	add_submenu_page( 
 		$parent_page, 
-		'Add Category', 
-		'Category', 
+		'Manage Stock', 
+		'Stock', 
 		'manage_options', 
-		'add_category_sub', 
-		'simp_ec_manage_category_page_html'
-	);
-
-	add_submenu_page( 
-		$parent_page, 
-		'Add Attributes', 
-		'Attributes', 
-		'manage_options', 
-		'manage_stock_sub', 
-		null
-	);
-
-	add_submenu_page( 
-		$parent_page, 
-		'Add Attributes', 
-		'Attributes', 
-		'manage_options', 
-		'add_attribute_sub', 
-		'simp_ec_manage_attribute_page_html'
+		'manage_stock', 
+		'simp_ec_manage_stock_page_html'
 	);
 
 	add_submenu_page( 
@@ -120,12 +93,32 @@ function simp_ec_options_page()
 
 	add_submenu_page( 
 		$parent_page, 
-		'Settings', 
+		'Manage Attributes', 
+		'Attributes', 
+		'manage_options', 
+		'manage_attribute_sub', 
+		'simp_ec_manage_attribute_page_html'
+	);
+
+	add_submenu_page( 
+		$parent_page, 
+		'Manage Category', 
+		'Category', 
+		'manage_options', 
+		'add_category_sub', 
+		'simp_ec_manage_category_page_html'
+	);
+
+	add_submenu_page( 
+		$parent_page, 
+		'Settings',
 		'Settings', 
 		'manage_options', 
 		'settings_page', 
 		'simp_ec_settings_page_html'
 	);
+
+	
 }
 
 add_action('admin_menu', 'simp_ec_options_page');

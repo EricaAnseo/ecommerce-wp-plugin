@@ -1,5 +1,8 @@
 <?php 
-
+/**
+ * @since 		1.0.0
+ * @package		Simplified_Ecommerce
+**/
 function simp_ec_shortcode_product ($atts)
 {
 	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/table_names.php');
@@ -28,8 +31,6 @@ function simp_ec_shortcode_product ($atts)
 	{
 		$results = $wpdb->get_results( 'SELECT * FROM ' . $table_product . ' INNER JOIN ' . $table_pcs . ' ON ' .  $table_pcs .'.product_id = ' . $table_product . '.product_id INNER JOIN ' . $table_pc . ' ON ' . $table_pcs . '.pcat_id = ' . $table_pc . '.pcat_id WHERE ' . $table_pc . '.pcat_name = \'' . $simp_ec_att['category'] . '\''  );
 	}
-
-
 		
 	if($results){ 
 		$no_results = count($results);

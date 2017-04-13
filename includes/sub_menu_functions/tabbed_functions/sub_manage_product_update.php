@@ -11,14 +11,16 @@
 	<thead>
 		<tr>
 			<td class="manage-column column-cb check-column">
-				<input style="display: block;" type="checkbox" name="bulk-delete[]" value="" />
+			
 			</td>
 			<th class="manage-column column-title column-primary"><a href="<?php //'page=simplified-ecommerce?sort=name'?>">Name</a></th>
 			<th><a href="#sort=name">SKU</a></th>
 			<th>Price</th>
 			<th>Short Description</th>
 			<th>Description</th>
+			<th>Product Type</th>
 			<th>Category</th>
+			<th class="column_delete"></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -32,14 +34,14 @@
 ?>
 			
 			<tr class="simp_ec_row_update">
-				<td><input type="checkbox" name="bulk-delete[<?php echo $product->product_id ?>]" value="bulk-delete[<?php echo $product->product_id ?>]" /></td>
+				<td></td>
 				<td class="simp_ec_column_update"><textarea id="pname" class="simp_ec_textarea" type="text" name="pname[<?php echo $product->product_id ?>]" ><?php echo $product->pname ?></textarea></td>
 				<td class="simp_ec_column_update"><textarea id="product_sku" class="simp_ec_textarea" type="text" name="product_sku[<?php echo $product->product_id ?>]" ><?php echo $product->product_sku ?></textarea></td>
 				<td class="simp_ec_column_update"><input id="pprice" type="number" class="simp_ec_input_number" name="pprice[<?php echo $product->product_id ?>]" value="<?php echo $product->pprice ?>" /></td>
 				<td class="simp_ec_column_update"><textarea id="pshortdesc" class="simp_ec_textarea" type="text" name="pshortdesc[<?php echo $product->product_id ?>]" ><?php echo $product->pshortdesc ?></textarea></td>
 				<td class="simp_ec_column_update"><textarea id="pdesc" class="simp_ec_textarea" type="text" name="pdesc[<?php echo $product->product_id ?>]" ><?php echo $product->pdesc ?></textarea></td>
-				
-				<td class="simp_ec_column_update">
+				<td class="simp_ec_column_update"><textarea class="simp_ec_textarea" type="text"></textarea></td>
+				<td class="simp_ec_column_update"> 
 					<select>
 						<option value=''></option>
 <?php 
@@ -50,6 +52,7 @@
 					</select>
 
 				</td>
+				<td></td>
 			</tr>
 		
 <?php 	} //foreach result as product ?>
@@ -65,7 +68,9 @@
             <th>Price</th>
             <th>Short Description</th>
             <th>Description</th>
+            <th>Product Type</th>
            	<th>Category</th>
+           	<th class="column_delete"></th>
 		</tr>
 	</tfoot>
 </table>

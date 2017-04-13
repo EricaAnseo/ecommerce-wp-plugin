@@ -12,11 +12,12 @@
 			</td>
 			<th class="manage-column column-title column-primary"><a href="<?php //the_permalink() . 'page=simplified-ecommerce?sort=name'?>">Name</a></th>
 			<th><a href="#sort=name">SKU</a></th>
-			<th>Price</th>
+			<th>Price (&euro;)</th>
 			<th>Short Description</th>
 			<th>Description</th>
+			<th>Product Type</th>
 			<th>Category</th>
-			<th class="column_delete"></th>
+			<th class="column_delete"></th> 
 		</tr>
 	</thead>
 	<tbody>
@@ -32,7 +33,6 @@
 <?php
 		foreach ( $results as $product ){ 
 ?>
-
 			<tr>
 				<td><input type="checkbox" name="bulk-delete[<?php echo $product->product_id ?>]" value="bulk-delete[<?php echo $product->product_id ?>]" /></td>
 				<td><?php echo $product->pname ?></td>
@@ -41,15 +41,24 @@
 				<td><?php echo $product->pshortdesc ?></td>
 				<td><?php echo $product->pdesc ?></td>
 				<td>
-					<select>
-						<option value=''></option>
-<?php 
-						foreach ( $categories as $category ){
-							echo '<option value="' . $category->pcat_id . '">' . $category->pcat_name . '</option>';
-						}
-?>						
-					</select>
+					<?php 
+						foreach($results_product_type as $ptype)
+						{
+							if ($product->product_id == $ptype->product_id) {
+								echo $ptype->ptype_name . ', ';
 
+							}
+						} ?>
+				</td>
+				<td>
+					<?php 
+						foreach($results_product_category as $pcategory)
+						{
+							if ($product->product_id == $pcategory->product_id) {
+								echo $pcategory->pcat_name . ', ';
+
+							}
+						} ?>
 				</td>
 				<td class="simp_ec_row_delete">
 					<form id="delete_product_form" action="#delete-product" method="post" onsubmit="return confirm('Are you sure you want to delete this product?');"">
@@ -71,6 +80,7 @@
 	                <th>Price</th>
 	                <th>Short Description</th>
 	                <th>Description</th>
+	                <th>Product Type</th>
 	               	<th>Category</th>
 					<th></th>
         		</tr>

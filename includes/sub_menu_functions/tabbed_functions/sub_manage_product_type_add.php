@@ -9,9 +9,7 @@
 	<table class="wp-list-table widefat fixed simp_ec_table_view">
 		<thead>
 			<tr>
-				<td class="manage-column column-cb check-column">
-					<input style="display: block;" type="checkbox" name="bulk-delete[]" value="" />
-				</td>
+				<td class="manage-column column-cb check-column"></td>
 				<th class="manage-column column-title column-primary">Product Type Name</th>
 				<th>Product Type Description</th>
 				<th>Product Type Attributes</th>
@@ -22,7 +20,7 @@
 	<?php
 		for ($i=0; $i< $rows; $i++){ ?>
 			<tr class="simp_ec_row_insert">
-				<td><input type="checkbox" name="bulk-delete[]" value="bulk-delete[]" /></td>
+				<td></td>
 				<td class="simp_ec_column_insert"><textarea id="ptype_name" class="simp_ec_textarea" type="text" name="ptype_name[<?php echo $i ?>]" ></textarea></td>
 				<td class="simp_ec_column_insert"><textarea id="ptype_desc" class="simp_ec_textarea" type="text" name="ptype_desc[<?php echo $i ?>]" ></textarea></td>
 				<td class="simp_ec_column_insert"><textarea id="pattribute_name" class="simp_ec_textarea" type="text" name="pattribute_name[<?php echo $i ?>]" ></textarea></td>
@@ -36,17 +34,15 @@
 		</tbody>
 		<tfoot>
 			<tr>
-				<td class="manage-column column-cb check-column">
-					<input style="display: block;" type="checkbox" name="bulk-delete[]" value="" />
-				</td>
-				<th class="manage-column column-title column-primary"><a href="">Product Type Name</a></th>
+				<td class="manage-column column-cb check-column"></td>
+				<th class="manage-column column-title column-primary">Product Type Name</th>
 				<th>Product Type Description</th>
 				<th>Product Type Attributes</th>
 				<th class="column_delete"></th>
 			</tr>
 		</tfoot>
 	</table>
-	<input type="submit" value="Add Products" name="add_product_types_and_attributes" class="button button-primary simp_ec_btn_submit" />
+	<input type="submit" value="Add" name="add_product_types_and_attributes" class="button button-primary simp_ec_btn_submit" />
 </form>
 
 <?php 

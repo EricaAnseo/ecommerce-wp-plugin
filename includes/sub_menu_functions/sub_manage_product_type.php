@@ -9,7 +9,6 @@ function simp_ec_manage_product_types_page_html()
 	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/table_names.php'); 
 	$active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'tab_product_type_view';
 
-	//Delete later, just for me to know.
 	//$table_pa = $wpdb->prefix . "simp_ec_product_attribute"; 
 	//$table_pat = $wpdb->prefix . "simp_ec_product_attribute_type"; 
 	//$table_pt = $wpdb->prefix . "simp_ec_product_type";
@@ -52,7 +51,9 @@ function simp_ec_manage_product_types_page_html()
         } 
         else {
             include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/sub_menu_functions/tabbed_functions/sub_manage_product_type_update.php');
-        } 
+        } ?>
 
-} ?>
 </div>
+
+<?php } ?>
+

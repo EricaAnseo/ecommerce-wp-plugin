@@ -19,30 +19,22 @@ function simp_ec_products_page_html()
 				<div class="col-group">
 	                <span class="col-dt-6">
 	                	<input id="pname" placeholder="Product Name" style="width: 100%; resize: none; " type="text" name="pname" ></textarea>
-	                </span>
-	                <span class="col-dt-3">
-	            		<input id="sku" placeholder="SKU" style="width: 100%;" type="text" name="sku"/>
-	            	</span>
-	            	<span class="col-dt-3">
-	            		<input id="pprice" placeholder="Price" style="" min="0" placeholder="0" type="number" name="pprice" />
-	            	</span>
-		        </div>
-	            <div class="col-group">
-	            	<span class="col-dt-6">
+	                	<div class="col-group">
+		                	<span class="col-dt-6">
+		            			<input id="sku" placeholder="SKU" style="width: 100%;" type="text" name="sku"/>
+		            		</span>
+		            		<span class="col-dt-6">
+		            			<input id="pprice" placeholder="Price" style="width: 100%;" min="0" placeholder="0" type="number" name="pprice" />
+		            		</span>
+		            	</div>
 	            		<textarea id="pshortdesc" placeholder="Short Description" style="width: 100%; height:70px;" type="text" name="pshortdesc"></textarea>
-	            	</span>			         
-	            	<span class="col-dt-6">
 	            		<textarea id="pdesc" placeholder="Description" style="width: 100%; height:70px;" name="pdesc"></textarea>
-	            	</span>	            
-	            </div>
-	            <div class="col-group">
-	            	<span class="col-dt-4">
 	            		<textarea id="ptype" placeholder="Product Type" class="simp_ec_textarea" type="text" name="ptype" ></textarea>
-	            	</span>
-	            	<span class="col-dt-4">
 	            		<textarea id="category" placeholder="Category" class="simp_ec_textarea" type="text" name="category" ></textarea>
 	            	</span>
-	            	<span class="col-dt-4"></span>
+	            	<span class="col-dt-6">
+	            		
+	            	</span>
 	            </div>
 				<input type="submit" value="Submit" class="button button-primary" />
 			</form>
