@@ -75,8 +75,8 @@ function simp_ec_db_install() {
 		ptype_id mediumint(7) NOT NULL,
 		pattribute_id mediumint(9) NOT NULL,
 		PRIMARY KEY  (ptype_id, pattribute_id), 
-		FOREIGN KEY (ptype_id) REFERENCES $table_pt (ptype_id),
-		FOREIGN KEY (pattribute_id) REFERENCES $table_pa (pattribute_id)
+		FOREIGN KEY (ptype_id) REFERENCES $table_pt (ptype_id) ON DELETE CASCADE,
+		FOREIGN KEY (pattribute_id) REFERENCES $table_pa (pattribute_id) ON DELETE CASCADE
 		) $charset_collate;";
 
 		dbDelta( $sql );
@@ -117,8 +117,8 @@ function simp_ec_db_install() {
 		pcat_id mediumint(3) NOT NULL,
 		product_id mediumint(10) NOT NULL,
 		PRIMARY KEY  (pcat_id, product_id),
-		FOREIGN KEY (pcat_id) REFERENCES $table_pc (pcat_id),
-		FOREIGN KEY (product_id) REFERENCES $table_product (product_id)
+		FOREIGN KEY (pcat_id) REFERENCES $table_pc (pcat_id) ON DELETE CASCADE,
+		FOREIGN KEY (product_id) REFERENCES $table_product (product_id) ON DELETE CASCADE
 		) $charset_collate;";
 
 		dbDelta( $sql );
@@ -130,8 +130,8 @@ function simp_ec_db_install() {
 		ptype_id mediumint(7) NOT NULL,
 		pcat_id mediumint(3) NOT NULL,
 		PRIMARY KEY  (ptype_id, pcat_id),
-		FOREIGN KEY (ptype_id) REFERENCES $table_pat (ptype_id),
-		FOREIGN KEY (pcat_id) REFERENCES $table_pc (pcat_id)
+		FOREIGN KEY (ptype_id) REFERENCES $table_pat (ptype_id) ON DELETE CASCADE,
+		FOREIGN KEY (pcat_id) REFERENCES $table_pc (pcat_id) ON DELETE CASCADE
 		) $charset_collate;";
 
 		dbDelta( $sql );
@@ -148,8 +148,8 @@ function simp_ec_db_install() {
 		product_id mediumint(10) NOT NULL,
 		ptype_id mediumint(7) NOT NULL,
 		PRIMARY KEY  (vproduct_id),
-		FOREIGN KEY (product_id) REFERENCES $table_product (product_id),
-		FOREIGN KEY (ptype_id) REFERENCES $table_pt (ptype_id)
+		FOREIGN KEY (product_id) REFERENCES $table_product (product_id) ON DELETE CASCADE,
+		FOREIGN KEY (ptype_id) REFERENCES $table_pt (ptype_id) ON DELETE CASCADE
 		) $charset_collate;";
 
 		dbDelta( $sql );
@@ -175,8 +175,8 @@ function simp_ec_db_install() {
 		product_id mediumint(10) NOT NULL,
 		order_amount shortint(7) NOT NULL,
 		PRIMARY KEY  (customer_id, product_id),
-		FOREIGN KEY (product_id) REFERENCES $table_product (product_id),
-		FOREIGN KEY (customer_id) REFERENCES $table_customer (customer_id)
+		FOREIGN KEY (product_id) REFERENCES $table_product (product_id) ON DELETE CASCADE,
+		FOREIGN KEY (customer_id) REFERENCES $table_customer (customer_id) ON DELETE CASCADE
 		) $charset_collate;";
 
 		dbDelta( $sql );

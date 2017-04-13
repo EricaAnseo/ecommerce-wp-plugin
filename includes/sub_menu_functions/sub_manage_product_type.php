@@ -7,55 +7,52 @@
 function simp_ec_manage_product_types_page_html()
 {
 	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/table_names.php'); 
+	$active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'tab_product_type_view';
 
-	$results = $wpdb->get_results( 'SELECT * FROM ' . $table_pa);
-	$no_of_products = $wpdb->get_var( 'SELECT COUNT(*) FROM '  . $table_pa);
+	//Delete later, just for me to know.
+	//$table_pa = $wpdb->prefix . "simp_ec_product_attribute"; 
+	//$table_pat = $wpdb->prefix . "simp_ec_product_attribute_type"; 
+	//$table_pt = $wpdb->prefix . "simp_ec_product_type";
+	$results_ptype = $wpdb->get_results( 'SELECT * FROM ' . $table_pt);
+	$results_pattribute = $wpdb->get_results( 'SELECT * FROM ' . $table_pa);
+	$results_join = $wpdb->get_results( 'SELECT * FROM ' . $table_pat . ' JOIN ' . $table_pa . ' ON ' .  $table_pat .'.pattribute_id = ' . $table_pa . '.pattribute_id');
+	$no_of_product_types = $wpdb->get_var( 'SELECT COUNT(*) FROM '  . $table_pt);
+	$rows = 4;
+	$product_type_count = 0;
+	$product_attribute_count = 0;
 
 ?>
 
 <div class="wrap simp_ec_container">
-	<h1><?php echo get_admin_page_title(); ?></h1>
-		<form action="#add_product_types_attributes" method="post" name="add_product">
-				<label for="ptype_name">Product Type Name</label> 
-				<input id="ptype_name" type="text" name="ptype_name" /> <hr/>
+	<h1 class="wp-heading-inline"><?php echo get_admin_page_title(); ?></h1>
+    <span style="float:right;"> 
+        <div class="insert-product-display" style="display:inline-block; padding-top: 18px;">
+        	<a href="?page=product_type&tab=tab_product_type_view" class="page-title-action <?php echo $active_tab == 'tab_product_type_view' ? 'nav-tab-active' : ''; ?>">
+        		<span class="dashicons dashicons-editor-table"></span> View
+        	</a>
+        	<a href="?page=product_type&tab=tab_product_type_add" class="page-title-action <?php echo $active_tab == 'tab_product_type_add' ? 'nav-tab-active' : ''; ?>">
+        		<span class="dashicons dashicons-plus"></span> Add
+        	</a>
+        	<a href="?page=product_type&tab=tab_product_type_edit" class="page-title-action <?php echo $active_tab == 'tab_product_type_edit' ? 'nav-tab-active' : ''; ?>">
+        		<span class="dashicons dashicons-edit"></span> Edit
+        	</a>
+        </div>
+    </span>
+    <hr class="wp-header-end">
+     <?php settings_errors(); 
+    	if( isset( $_GET[ 'tab' ] ) ) {
+		    $active_tab = $_GET[ 'tab' ];
+		} // end if
 
-				<label for="ptype_desc">Product Type Desciption</label> 
-				<textarea id="ptype_desc" type="text" name="ptype_desc" ></textarea> <hr/>
+        if( $active_tab == 'tab_product_type_view' ) {
+        	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/sub_menu_functions/tabbed_functions/sub_manage_product_type_view.php');
+        } 
+        else if( $active_tab == 'tab_product_type_add') {
+            include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/sub_menu_functions/tabbed_functions/sub_manage_product_type_add.php');
+        } 
+        else {
+            include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/sub_menu_functions/tabbed_functions/sub_manage_product_type_update.php');
+        } 
 
-				<label for="pattribute_name">Product Type Attributes</label> 
-				<textarea id="pattribute_name" type="text" name="pattribute_name" ></textarea> <hr/>				
-
-			<input type="submit" value="Submit" class="button button-primary" />
-		</form>
-
+} ?>
 </div>
-
-<?php 
-
-	if(isset($_POST['ptype_name']) || isset($_POST['ptype_desc']) || isset($_POST['pattribute_name']) )	{ 
-
-		$ptype_name = sanitize_text_field( $_POST['ptype_name'] );
-		$ptype_desc = sanitize_text_field( $_POST['ptype_desc'] );
-		$pattribute_name = sanitize_text_field( $_POST['pattribute_name'] );
-		$lastid = $wpdb->insert_id; 
-
-		$query_type = array('ptype_id' => $lastid,
-					'ptype_name' => $ptype_name,
-					'ptype_desc' => $ptype_desc);
-
-		$query_attribute = array('pattribute_id' => $lastid,
-					'pattribute_name' => $pattribute_name
-					);
-
-		$query_attribute_types = array('ptype_id' => $lastid,
-					'pattribute_id' => $lastid
-					);
-
-		$wpdb->insert($table_pt, $query_type, null);
-		$wpdb->insert($table_pa, $query_attribute, null);
-
-
-	}
-
-}
-

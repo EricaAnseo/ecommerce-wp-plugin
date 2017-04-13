@@ -69,7 +69,7 @@
 		</tr>
 	</tfoot>
 </table>
-<input type="submit" name="update_products_button" value="Update" class="button action" />
+<input type="submit" name="update_products_button" value="Update" class="button action simp_ec_btn_submit" />
 </form>
 <div class="view-product-buttons">
 	<form action="#delete_checked_product" method="post"  name="delete_checked_product">
@@ -106,6 +106,8 @@
 
 					$where = array('product_id' => $product->product_id);
 
+					//Format for updating a table
+					//Table Name, query, where condition, data type for query, data type for where
 					$wpdb->update($table_product, $query, $where, null, null ); 
 
 					$message = "Product Successfully Updated";

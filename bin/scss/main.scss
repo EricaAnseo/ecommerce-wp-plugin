@@ -24,7 +24,8 @@
 }
 
 .simp_ec_container .simp_ec_table_update .simp_ec_row_update .simp_ec_column_update, 
-.widefat .simp_ec_row_update .simp_ec_column_update
+.widefat .simp_ec_row_update .simp_ec_column_update, 
+.simp_ec_table_view .simp_ec_row_insert .simp_ec_column_insert
 {
 	padding: 1px !important;
 	border-bottom: 1px solid #e1e1e1;
@@ -32,7 +33,8 @@
 }
 
 .simp_ec_container .simp_ec_table_update .simp_ec_row_update .simp_ec_column_update .simp_ec_textarea,
-.simp_ec_container .simp_ec_table_update .simp_ec_row_update .simp_ec_column_update .simp_ec_input_number
+.simp_ec_container .simp_ec_table_update .simp_ec_row_update .simp_ec_column_update .simp_ec_input_number,
+.simp_ec_table_view .simp_ec_row_insert .simp_ec_column_insert .simp_ec_textarea
 {
 	width: 100%;
 	resize: none;
@@ -42,9 +44,27 @@
     font-size: 13px;
 }
 
-.simp_ec_container .simp_ec_table_update .simp_ec_row_update .simp_ec_column_update .simp_ec_input_number
+.simp_ec_container .simp_ec_table_update .simp_ec_row_update .simp_ec_column_update .simp_ec_input_number,
+.simp_ec_table_view .simp_ec_row_insert .simp_ec_column_insert .simp_ec_input_number
 {
-    height: 44px;
+    height: 50px;
+    width: 100%;
+    border: none;
+}
+
+thead .table_head_sku
+{
+	width:110px;
+}
+
+thead .table_head_price
+{
+	width:75px;
+}
+
+thead .column_delete
+{
+	width: 60px;
 }
 
 .simp_ec_container form .simp_ec_btn_delete
@@ -57,18 +77,18 @@
     color: #0073aa;
 }
 
-
-.simp_ec_table_view .simp_ec_textarea, 
 .simp_ec_list_view .simp_ec_textarea,
 .simp_ec_add_single_product .simp_ec_textarea
 {
 	width: 100%; 
 	resize: none; 
-	height: 70px;
+	height: 50px;
 }
 
-.simp_ec_list_view .simp_ec_btn_submit
+.simp_ec_list_view .simp_ec_btn_submit, 
+.simp_ec_btn_submit
 {
 	float:right; 
-	margin-top: 15px;
+	margin-top: 15px !important;
 }
+

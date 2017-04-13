@@ -38,9 +38,9 @@ function simp_ec_manage_products_page_html()
 			} // end if
 
 	        if( $active_tab == 'tab_view_products' ) {
-	        	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/sub_menu_functions/sub_manage_product_view.php');
+	        	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/sub_menu_functions/tabbed_functions/sub_manage_product_view.php');
 	        } else {
-	            include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/sub_menu_functions/sub_manage_product_update.php');
+	            include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/sub_menu_functions/tabbed_functions/sub_manage_product_update.php');
 	        } 
 	    ?>
 

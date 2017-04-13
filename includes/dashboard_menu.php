@@ -111,10 +111,10 @@ function simp_ec_options_page()
 
 	add_submenu_page( 
 		$parent_page, 
-		'Add Product Type', 
+		'Product Type', 
 		'Product Type', 
 		'manage_options', 
-		'add_ptype_sub', 
+		'product_type', 
 		'simp_ec_manage_product_types_page_html'
 	);
 
