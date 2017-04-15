@@ -15,7 +15,7 @@
 			</td>
 			<th class="manage-column column-title column-primary"><a href="<?php //'page=simplified-ecommerce?sort=name'?>">Name</a></th>
 			<th><a href="#sort=name">SKU</a></th>
-			<th>Price</th>
+			<th>Price (&euro;)</th>
 			<th>Short Description</th>
 			<th>Description</th>
 			<th>Product Type</th>
@@ -40,17 +40,23 @@
 				<td class="simp_ec_column_update"><input id="pprice" type="number" class="simp_ec_input_number" name="pprice[<?php echo $product->product_id ?>]" value="<?php echo $product->pprice ?>" /></td>
 				<td class="simp_ec_column_update"><textarea id="pshortdesc" class="simp_ec_textarea" type="text" name="pshortdesc[<?php echo $product->product_id ?>]" ><?php echo $product->pshortdesc ?></textarea></td>
 				<td class="simp_ec_column_update"><textarea id="pdesc" class="simp_ec_textarea" type="text" name="pdesc[<?php echo $product->product_id ?>]" ><?php echo $product->pdesc ?></textarea></td>
-				<td class="simp_ec_column_update"><textarea class="simp_ec_textarea" type="text"></textarea></td>
-				<td class="simp_ec_column_update"> 
-					<select>
-						<option value=''></option>
-<?php 
-					foreach ( $categories as $category ){
-						echo '<option value="' . $category->pcat_id . '">' . $category->pcat_name . '</option>';
-					} //foreach
-?>						
-					</select>
+				<td class="simp_ec_column_update"><textarea class="simp_ec_textarea" type="text"><?php 
+						foreach($results_product_type as $ptype)
+						{
+							if ($product->product_id == $ptype->product_id) {
+								echo $ptype->ptype_name . ', ';
 
+							}
+						} ?></textarea></td>
+				<td class="simp_ec_column_update" > 
+					<textarea class="simp_ec_textarea" type="text" ><?php 
+						foreach($results_product_category as $pcategory)
+						{
+							if ($product->product_id == $pcategory->product_id) { 
+								echo $pcategory->pcat_name;
+
+							}
+						} ?></textarea>
 				</td>
 				<td></td>
 			</tr>
@@ -65,7 +71,7 @@
 			</td>
             <th>Name</th>
             <th>SKU</th>
-            <th>Price</th>
+            <th>Price (&euro;)</th>
             <th>Short Description</th>
             <th>Description</th>
             <th>Product Type</th>
@@ -74,14 +80,9 @@
 		</tr>
 	</tfoot>
 </table>
-<input type="submit" name="update_products_button" value="Update" class="button action simp_ec_btn_submit" />
+<input type="submit" name="update_products_button" value="Update" class="button button-primary simp_ec_btn_submit" />
 </form>
-<div class="view-product-buttons">
-	<form action="#delete_checked_product" method="post"  name="delete_checked_product">
-		<input type="submit" name="delete_checked_product_button" value="Delete" id="delete_checked_product" class="button action" />
-	</form>
 
-</div>
 
 <?php	} //if results
 
@@ -130,10 +131,7 @@
 
 	}
 
-
-
 ?>
-		
-<p>Number of products added <?php echo $no_of_products ?></p>
+
 
 

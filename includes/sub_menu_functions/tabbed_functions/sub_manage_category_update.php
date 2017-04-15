@@ -1,7 +1,7 @@
 <table class="wp-list-table widefat fixed simp_ec_table_view">
 	<thead>
 		<tr>
-			<td class="manage-column column-cb check-column"><input type="checkbox" name="bulk-delete[]" value="bulk-delete[]" /></td>
+			<td class="manage-column column-cb check-column"></td>
 			<th>Category Name</th>
 			<th>Category Slug</th>
 			<th>Category Description</th>
@@ -13,7 +13,7 @@
 	<?php if($results){
 			foreach ( $results as $category ){ ?>
 			<tr class="simp_ec_row_insert">
-				<td><input type="checkbox" name="bulk-delete[<?php echo $category->pcat_id ?>]" value="bulk-delete[<?php echo $category->pcat_id ?>]" /></td>
+				<td></td>
 				<td class="simp_ec_column_insert"> 
 					<textarea id="pcat_name" class="simp_ec_textarea" type="text" name="pcat_name[<?php echo $category->pcat_id ?>]" ><?php echo $category->pcat_name ?></textarea>
 				</td>
@@ -35,7 +35,7 @@
 	</tbody>
 	<tfoot>
 		<tr>
-			<td class="manage-column column-cb check-column"><input type="checkbox" name="bulk-delete[]" value="bulk-delete[]" /></td>
+			<td class="manage-column column-cb check-column"></td>
 			<th>Category Name</th>
 			<th>Category Slug</th>
 			<th>Category Description</th>

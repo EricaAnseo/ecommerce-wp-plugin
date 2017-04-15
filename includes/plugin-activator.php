@@ -4,7 +4,7 @@
  * @package		Simplified_Ecommerce
 **/
 
-require_once plugin_dir_path( __FILE__ ) . 'tables/table_names.php';
+
 
 function simp_ec_update_db_check() {
     global $simp_ec_db_version;
@@ -16,7 +16,7 @@ function simp_ec_update_db_check() {
 }
 add_action( 'plugins_loaded', 'simp_ec_update_db_check' );
 
-register_activation_hook( __FILE__, 'simp_ec_db_install' );
+//register_activation_hook( __FILE__, 'simp_ec_db_install' );
 
 function simp_ec_update_database_table() {
 	global $wpdb;
@@ -25,10 +25,11 @@ function simp_ec_update_database_table() {
 
 function simp_ec_db_install() {
 
+	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/table_names.php');
+	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+
 	global $simp_ec_db_version;
 	$simp_ec_db_version = '1.01';
-
-	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
 	//Test Table, ignore
 	if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
@@ -75,8 +76,8 @@ function simp_ec_db_install() {
 		ptype_id mediumint(7) NOT NULL,
 		pattribute_id mediumint(9) NOT NULL,
 		PRIMARY KEY  (ptype_id, pattribute_id), 
-		FOREIGN KEY (ptype_id) REFERENCES $table_pt (ptype_id) ON DELETE CASCADE,
-		FOREIGN KEY (pattribute_id) REFERENCES $table_pa (pattribute_id) ON DELETE CASCADE
+		FOREIGN KEY  (ptype_id) REFERENCES $table_pt (ptype_id) ON DELETE CASCADE,
+		FOREIGN KEY  (pattribute_id) REFERENCES $table_pa (pattribute_id) ON DELETE CASCADE
 		) $charset_collate;";
 
 		dbDelta( $sql );
@@ -117,8 +118,8 @@ function simp_ec_db_install() {
 		pcat_id mediumint(3) NOT NULL,
 		product_id mediumint(10) NOT NULL,
 		PRIMARY KEY  (pcat_id, product_id),
-		FOREIGN KEY (pcat_id) REFERENCES $table_pc (pcat_id) ON DELETE CASCADE,
-		FOREIGN KEY (product_id) REFERENCES $table_product (product_id) ON DELETE CASCADE
+		FOREIGN KEY  (pcat_id) REFERENCES $table_pc (pcat_id) ON DELETE CASCADE,
+		FOREIGN KEY  (product_id) REFERENCES $table_product (product_id) ON DELETE CASCADE
 		) $charset_collate;";
 
 		dbDelta( $sql );
@@ -130,8 +131,8 @@ function simp_ec_db_install() {
 		ptype_id mediumint(7) NOT NULL,
 		pcat_id mediumint(3) NOT NULL,
 		PRIMARY KEY  (ptype_id, pcat_id),
-		FOREIGN KEY (ptype_id) REFERENCES $table_pat (ptype_id) ON DELETE CASCADE,
-		FOREIGN KEY (pcat_id) REFERENCES $table_pc (pcat_id) ON DELETE CASCADE
+		FOREIGN KEY  (ptype_id) REFERENCES $table_pat (ptype_id) ON DELETE CASCADE,
+		FOREIGN KEY  (pcat_id) REFERENCES $table_pc (pcat_id) ON DELETE CASCADE
 		) $charset_collate;";
 
 		dbDelta( $sql );
@@ -147,9 +148,11 @@ function simp_ec_db_install() {
 		vproduct_sku varchar(200),
 		product_id mediumint(10) NOT NULL,
 		ptype_id mediumint(7) NOT NULL,
+		pattribute_id mediumint(9) NOT NULL,
 		PRIMARY KEY  (vproduct_id),
-		FOREIGN KEY (product_id) REFERENCES $table_product (product_id) ON DELETE CASCADE,
-		FOREIGN KEY (ptype_id) REFERENCES $table_pt (ptype_id) ON DELETE CASCADE
+		FOREIGN KEY  (product_id) REFERENCES $table_product (product_id) ON DELETE CASCADE,
+		FOREIGN KEY  (ptype_id) REFERENCES $table_pt (ptype_id) ON DELETE CASCADE, 
+		FOREIGN KEY  (pattribute_id) REFERENCES $table_pa (pattribute_id) ON DELETE CASCADE
 		) $charset_collate;";
 
 		dbDelta( $sql );
@@ -171,16 +174,19 @@ function simp_ec_db_install() {
 	//10. Order Table - CREATED
 	if($wpdb->get_var("SHOW TABLES LIKE '$table_order'") != $table_order) {
 		$sql = "CREATE TABLE IF NOT EXISTS $table_order (
+		order_id mediumint(12) NOT NULL AUTO_INCREMENT,
 		customer_id mediumint(6) NOT NULL,
 		product_id mediumint(10) NOT NULL,
 		order_amount shortint(7) NOT NULL,
-		PRIMARY KEY  (customer_id, product_id),
-		FOREIGN KEY (product_id) REFERENCES $table_product (product_id) ON DELETE CASCADE,
-		FOREIGN KEY (customer_id) REFERENCES $table_customer (customer_id) ON DELETE CASCADE
+		PRIMARY KEY  (order_id),
+		FOREIGN KEY  (product_id) REFERENCES $table_product (product_id) ON DELETE CASCADE,
+		FOREIGN KEY  (customer_id) REFERENCES $table_customer (customer_id) ON DELETE CASCADE
 		) $charset_collate;";
 
 		dbDelta( $sql );
 	}
+
+	
 
 	//Used to check errors.
 	//$wpdb->hide_errors();

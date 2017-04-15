@@ -77,16 +77,13 @@ function simp_ec_activate_plugin() {
 
 	$new_version = '2.0.0';
 
-	if (get_option(SIMPLIFIED_ECOMMERCE_VERSION_KEY) != $new_version) {
-	    simp_ec_update_database_table();
-	    update_option(SIMPLIFIED_ECOMMERCE_VERSION_KEY, $new_version);
-	}
+	// if (get_option(SIMPLIFIED_ECOMMERCE_VERSION_KEY) != $new_version) {
+	//     simp_ec_update_database_table();
+	//     update_option(SIMPLIFIED_ECOMMERCE_VERSION_KEY, $new_version);
+	// }
 
 	include_once(plugin_dir_path( __FILE__ ) . 'includes/plugin-activator.php');
-
-	$plugin = new Submenu( new Submenu_Page() );
-    $plugin->init();
-
+	simp_ec_db_install();
 
     // clear the permalinks after the post type has been registered
     //flush_rewrite_rules();
