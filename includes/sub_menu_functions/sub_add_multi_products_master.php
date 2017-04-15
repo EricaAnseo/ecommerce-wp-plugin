@@ -8,6 +8,8 @@ function simp_ec_add_multiple_products_html()
 { 
 	$active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'tab_table_view';
 	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/table_names.php');
+	$product_types = $wpdb->get_results( 'SELECT * FROM ' . $table_pt);
+	$categories = $wpdb->get_results( 'SELECT * FROM ' . $table_pc);
 	$rows = 5;
 	$count = 0;
 	$product = array();
@@ -57,13 +59,15 @@ function simp_ec_add_multiple_products_html()
 
 			if((isset($_POST['pname'])) || (isset($_POST['sku'])) || (isset($_POST['pdesc'])) || (isset($_POST['pshortdesc'])) || (isset($_POST['pprice'])) ){
 
-				$product_id = $wpdb->insert_id;
+				$lastid = $wpdb->insert_id;
 				$pname = array_map( 'esc_attr', $_POST['pname'] );
 				$product_sku = array_map( 'esc_attr', $_POST['sku']);
 				$pdesc = array_map( 'esc_attr', $_POST['pdesc']);
 				$pshortdesc = array_map( 'esc_attr', $_POST['pshortdesc']);
 				$pprice = array_map( 'esc_attr', $_POST['pprice']);
-				
+				$ptype = array_map( 'esc_attr', $_POST['ptype'] );
+				$category = array_map( 'esc_attr', $_POST['category'] );
+
 				if (!empty($pname)) 
 				{
 					foreach( $pname as $name ) {
@@ -88,7 +92,7 @@ function simp_ec_add_multiple_products_html()
 
 				for ($i=0; $i< $count; $i++){
 
-					$query = array('product_id' => $product_id,
+					$query_product = array('product_id' => $lastid,
 							'product_sku' => $product_sku[$i],
 							'pname' => $pname[$i], 
 							'pdesc' => $pdesc[$i],
@@ -97,16 +101,104 @@ function simp_ec_add_multiple_products_html()
 
 					if (!empty($pname[$i]) || !empty($product_sku[$i]) || !empty($pdesc[$i]) || !empty($pshortdesc[$i]) || !empty($pprice[$i]))
 				    {
-				        $wpdb->insert($table_product, $query, null);
-				    }
-					
-				}  
+				        $wpdb->insert($table_product, $query_product, null);
 
+				        if (!empty($ptype[$i]))
+				   		{
+
+					        foreach($product_types as $ptypes)
+					        {
+					        	if($ptypes->ptype_name != $ptype[$i])
+					        	{
+					        		$query_type = array('ptype_id' => $lastid,
+									'ptype_name' => $ptype[$i],
+									'ptype_desc' => '');
+					        		$wpdb->insert($table_pt, $query_type, null);
+
+					        		$foreign_key_type = $wpdb->get_results( 'SELECT * FROM ' . $table_pt . ' WHERE ptype_name = "' . $ptype[$i] . '"');
+					        		$foreign_key_product = $wpdb->get_results( 'SELECT * FROM ' . $table_product . ' WHERE pname = "' . $pname[$i] . '"');
+
+					        		foreach( $foreign_key_type as $product_type ) {
+					        			foreach( $foreign_key_product as $product ) {
+						        			$query_variable_product = array(
+						        					'vproduct_id' => $lastid,
+						        					'ptype_id' => $product_type->ptype_id,
+						        					'product_id' => $product->product_id);
+											$wpdb->insert($table_pv, $query_variable_product, null);
+										}
+					        		}
+					        	}
+					        	else 
+					        	{
+					        		$foreign_key_type = $wpdb->get_results( 'SELECT * FROM ' . $table_pt . ' WHERE ptype_name = "' . $ptype_name[$i] . '"');
+					        		$foreign_key_product = $wpdb->get_results( 'SELECT * FROM ' . $table_product . ' WHERE pname = "' . $pname[$i] . '"');
+
+					        		foreach( $foreign_key_type as $product_type ) {
+					        			foreach( $foreign_key_product as $product ) {
+						        			$query_variable_product = array(
+						        					'vproduct_id' => $lastid,
+						        					'ptype_id' => $product_type->ptype_id,
+						        					'product_id' => $product->product_id,
+						        					'p_attribute' => 2);
+											$wpdb->insert($table_pv, $query_variable_product, null);
+										}
+					        		}
+					        	}
+
+					        }
+
+				    	}
+
+				    	if (!empty($category[$i]))
+				   		{
+				   			foreach($categories as $cat)
+					        {
+					        	if($cat->pcat_name != $category[$i])
+					        	{
+					        		$query_category = array('pcat_id' => $lastid, 
+									'pcat_name' => $category[$i],
+									'pcat_slug' => $category[$i]);
+
+							        $wpdb->insert($table_pc, $query_category, null);
+
+							        $foreign_key_category = $wpdb->get_results( 'SELECT * FROM ' . $table_pc . ' WHERE pcat_name = "' . $ptype[$i] . '"');
+					        		$foreign_key_produ = $wpdb->get_results( 'SELECT * FROM ' . $table_product . ' WHERE pname = "' . $pname[$i] . '"');
+
+					        		foreach( $foreign_key_category as $fkcategory ) {
+					        			foreach( $foreign_key_produ as $prod ) {
+					        				$query_product_cat = array(
+						        					'pcat_id' => $fkcategory->pcat_id,
+						        					'product_id' => $prod->product_id);
+											$wpdb->insert($table_pcs, $query_product_cat, null);
+					        			}
+					        		}
+				
+					        	}
+
+					        	else
+					        	{
+				        		 	$foreign_key_category = $wpdb->get_results( 'SELECT * FROM ' . $table_pc . ' WHERE pcat_name = "' . $category[$i] . '"');
+					        		$foreign_key_produ = $wpdb->get_results( 'SELECT * FROM ' . $table_product . ' WHERE pname = "' . $pname[$i] . '"');
+
+					        		foreach( $foreign_key_category as $fk_category ) {
+					        			foreach( $foreign_key_produ as $fk_product ) {
+					        				$query_product_cat = array(
+						        					'pcat_id' => $fk_category->pcat_id,
+						        					'product_id' => $fk_product->product_id);
+											$wpdb->insert($table_pcs, $query_product_cat, null);
+					        			}
+					        		}
+					        	}
+					        }
+
+				   		}
+					
+					} 					
+
+				}
 			}
+
 	    ?>
         </form>
     </div><!-- /.wrap simp_ec_container-->
 <?php }
-
-
-

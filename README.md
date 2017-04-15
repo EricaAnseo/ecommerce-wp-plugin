@@ -15,6 +15,7 @@ Simplified Ecommerce is a student project created by Erica Chai. It was built us
 * [Node Package Manager](https://www.npmjs.com/)
 * [NodeMon 1.11.0](https://www.npmjs.com/package/nodemon)
 * [Clean-Css 4.0](https://github.com/jakubpawlowicz/clean-css)
+* [Node-Sass 4.1.1](https://github.com/sass/node-sass)
 * [CoffeeBar 1.0.0](https://www.npmjs.com/package/coffeebar)
 
 

@@ -14,8 +14,8 @@
 			
 			</td>
 			<th class="manage-column column-title column-primary"><a href="<?php //'page=simplified-ecommerce?sort=name'?>">Name</a></th>
-			<th><a href="#sort=name">SKU</a></th>
-			<th>Price (&euro;)</th>
+			<th class="table_head_sku"><a href="#sort=name">SKU</a></th>
+			<th class="table_head_price">Price (&euro;)</th>
 			<th>Short Description</th>
 			<th>Description</th>
 			<th>Product Type</th>
@@ -71,7 +71,7 @@
 			</td>
             <th>Name</th>
             <th>SKU</th>
-            <th>Price (&euro;)</th>
+            <th class="table_head_price">Price (&euro;)</th>
             <th>Short Description</th>
             <th>Description</th>
             <th>Product Type</th>

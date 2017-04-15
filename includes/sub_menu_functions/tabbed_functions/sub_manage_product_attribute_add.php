@@ -49,3 +49,6 @@
 	</table>
 	<input type="submit" value="Add" name="add_attributes" class="button button-primary simp_ec_btn_submit" />
 </form>
+<?php 
+	$note = 'if string is equal to product variable, add it to variable product. Repeat.';
+?>

@@ -84,6 +84,7 @@ function simp_ec_activate_plugin() {
 
 	include_once(plugin_dir_path( __FILE__ ) . 'includes/plugin-activator.php');
 	simp_ec_db_install();
+	simp_ec_install_data();
 
     // clear the permalinks after the post type has been registered
     //flush_rewrite_rules();

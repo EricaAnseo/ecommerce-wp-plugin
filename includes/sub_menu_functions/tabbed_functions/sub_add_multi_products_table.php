@@ -27,7 +27,7 @@
                         <textarea id="product_sku" class="simp_ec_textarea" type="text" name="sku[<?php echo $i ?>]" ></textarea>
                   </td>  
                   <td class="simp_ec_column_insert">
-                  	<input id="pprice" dir="rtl" style="text-align: right;" class="simp_ec_input_number" min="0" placeholder="0" type="number" name="pprice[<?php echo $i ?>]" />
+                  	<input id="pprice" class="simp_ec_input_number" min="0" placeholder="0" type="number" name="pprice[<?php echo $i ?>]" />
                   </td>
                   <td class="simp_ec_column_insert">
                   	<textarea id="pshortdesc" class="simp_ec_textarea" type="text" name="pshortdesc[<?php echo $i ?>]"></textarea>			         

@@ -14,8 +14,8 @@
 				<th class="manage-column column-title column-primary">
 					<a href="?page=simplified-ecommerce&sort=tab_view_products&sort=name" class=" <?php echo $sort_by == 'sort_by_name' ? 'nav-tab-active' : ''; ?>">Name</a>
 				</th>
-				<th><a href="#sort=name">SKU</a></th>
-				<th>Price (&euro;)</th>
+				<th  class="table_head_sku"><a href="#sort=name">SKU</a></th>
+				<th class="table_head_price">Price (&euro;)</th>
 				<th>Short Description</th>
 				<th>Description</th>
 				<th>Product Type</th>
@@ -75,7 +75,7 @@
 				</td>
                 <th>Name</th>
                 <th>SKU</th>
-                <th>Price (&euro;)</th>
+                <th class="table_head_price">Price (&euro;)</th>
                 <th>Short Description</th>
                 <th>Description</th>
                 <th>Product Type</th>
@@ -84,7 +84,7 @@
     		</tr>
 		</tfoot>
 	</table>
-	<input type="submit" name="delete_checked_product_button" value="Delete" id="delete_checked_product" class="button button button-primary simp_ec_btn_submit" />
+	<input type="submit" name="delete_checked_product_button" value="Delete" id="delete_checked_product" class="button button-primary simp_ec_btn_submit" />
 <!-- </form> -->
 <?php	} 
 

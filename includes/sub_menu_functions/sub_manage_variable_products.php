@@ -8,11 +8,9 @@ function simp_ec_manage_variable_products_html()
 { 
 	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/table_names.php');
 	$active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'tab_view_variable_product';
-	$results_variable_product = $wpdb->get_results( 'SELECT * FROM ' . $table_pv . ' JOIN ' . $table_pt . ' ON ' .  $table_pt .'.ptype_id = ' . $table_pv . '.ptype_id JOIN ' . $table_product . ' ON ' .  $table_product .'.product_id = ' . $table_pv . '.product_id JOIN ' . $table_pat . ' ON ' . $table_pat . '.ptype_id = ' . $table_pv . '.ptype_id JOIN ' . $table_pa . ' ON ' . $table_pat . '.pattribute_id = ' . $table_pa . '.pattribute_id');
-
-	$table_pa = $wpdb->prefix . "simp_ec_product_attribute"; 
-	$table_pat = $wpdb->prefix . "simp_ec_product_attribute_type"; 
-
+	$results_variable_product = $wpdb->get_results( 'SELECT * FROM ' . $table_pv . ' JOIN ' . $table_pt . ' ON ' .  $table_pt .'.ptype_id = ' . $table_pv . '.ptype_id JOIN ' . $table_product . ' ON ' .  $table_product .'.product_id = ' . $table_pv . '.product_id JOIN ' . $table_pa . ' ON ' . $table_pv . '.pattribute_id = ' . $table_pa . '.pattribute_id');
+	$rows = 5; 
+	$count = 0;
 ?>
 	<!-- Create a header in the default WordPress 'wrap' container -->
     <div class="wrap simp_ec_container">
@@ -39,18 +37,14 @@ function simp_ec_manage_variable_products_html()
 	        if( $active_tab == 'tab_view_variable_product' ) {
 	        	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/sub_menu_functions/tabbed_functions/sub_manage_variable_products_view.php');
 	        } 
-
 	        else if( $active_tab == 'tab_add_variable_product' ) {
 	        	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/sub_menu_functions/tabbed_functions/sub_manage_variable_products_add.php');
 	        }
-
 	        else {
 	        	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/sub_menu_functions/tabbed_functions/sub_manage_variable_products_edit.php');
-	        } // end if/else
-	         
+	        } // end if/else         
 	         
 	    ?>
-
          
     </div><!-- /.wrap -->
 <?php }
