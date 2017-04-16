@@ -65,5 +65,5 @@
         define($charset_collate, $wpdb->get_charset_collate());
 	}
 
-?>
+
 
