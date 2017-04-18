@@ -8,7 +8,8 @@
 		pdesc longtext, 
 		pshortdesc longtext, 
 		pprice decimal(6,2),
-		PRIMARY KEY  (product_id)
+		date_added datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		PRIMARY  KEY (product_id)
 		) $charset_collate;";
 
 		dbDelta( $sql );

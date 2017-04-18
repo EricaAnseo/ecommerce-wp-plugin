@@ -15,7 +15,7 @@ function simp_ec_add_multiple_products_html()
 	$product = array();
 	?>
 	<!-- Create a header in the default WordPress 'wrap' container -->
-   <div class="wrap simp_ec_container">
+    <div class="wrap simp_ec_container">
         <h1 class="wp-heading-inline"><?php echo get_admin_page_title(); ?></h1>
         <!-- <form class="simp_ec_form" action="#add_products" method="post" name="add_products"> -->
         <!-- <input type="submit" style="" value="Add Products" class="page-title-action" /> -->
@@ -102,6 +102,7 @@ function simp_ec_add_multiple_products_html()
 					if (!empty($pname[$i]) || !empty($product_sku[$i]) || !empty($pdesc[$i]) || !empty($pshortdesc[$i]) || !empty($pprice[$i]))
 				    {
 				        $wpdb->insert($table_product, $query_product, null);
+				        add_action('admin_notices', 'simp_ec_custom_admin_notice_success');
 
 				        if (!empty($ptype[$i]))
 				   		{
@@ -196,9 +197,20 @@ function simp_ec_add_multiple_products_html()
 					} 					
 
 				}
+
 			}
 
 	    ?>
         </form>
     </div><!-- /.wrap simp_ec_container-->
 <?php }
+
+// display custom admin notice
+function simp_ec_custom_admin_notice_success() { ?>
+	
+	<div class="notice notice-success is-dismissible">
+		<p><?php _e('Products successfully added.', 'simpEc'); ?></p>
+	</div>
+	
+<?php }
+

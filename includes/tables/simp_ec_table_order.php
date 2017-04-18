@@ -6,6 +6,7 @@
 		customer_id mediumint(6) NOT NULL,
 		product_id mediumint(10) NOT NULL,
 		order_amount int(7) NOT NULL,
+		date_ordered datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		PRIMARY KEY  (order_id),
 		FOREIGN KEY  (product_id) REFERENCES $table_product (product_id) ON DELETE CASCADE,
 		FOREIGN KEY  (customer_id) REFERENCES $table_customer (customer_id) ON DELETE CASCADE

@@ -4,8 +4,6 @@
  * @package		Simplified_Ecommerce
 **/
 
-
-
 function simp_ec_update_db_check() {
     global $simp_ec_db_version;
     if ( get_site_option( 'simp_ec_db_version' ) != $simp_ec_db_version ) 
@@ -42,6 +40,7 @@ function simp_ec_db_install() {
 	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/tables/simp_ec_table_variable_product.php');
 	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/tables/simp_ec_table_customer.php');
 	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/tables/simp_ec_table_order.php');
+	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/tables/simp_ec_table_options.php');
 
 	//Used to check errors.
 	//echo $wpdb->show_errors();
@@ -49,15 +48,17 @@ function simp_ec_db_install() {
 
 	//Storing the version of the db table
 	add_option( 'simp_ec_db_version', $simp_ec_db_version );
+	
 
 }
+
+
+
 
 //register_activation_hook( __FILE__, 'simp_ec_install_data' );
 
 function simp_ec_install_data() {
 	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/table_names.php');
-
-	include_once ('../../../wp-load.php');
 
 	global $wpdb;
 

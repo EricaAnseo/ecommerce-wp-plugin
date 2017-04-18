@@ -6,7 +6,7 @@
  * @wordpress-plugin
  * Plugin Name: Simplified Ecommerce 
  * Plugin URI: http://fyp.ericachai.ie/
- * Description: A plugin to add multiple products to your store.
+ * Description: An ecommerce plugin with a user experience design approach that allows retailers to effectively add content onto their online store
  * Version: 1.0.2
  * Author: Erica Chai
  * Author URI: http://ericachai.ie/
@@ -54,25 +54,30 @@ require_once (plugin_dir_path( __FILE__) . 'includes/dashboard_menu.php' );
 //    include_once $file;
 //}
 
+//Assets for the backend 
+function simp_ec_load_custom_assets() {
+	wp_register_style('fluidable-grid-css', plugins_url('public/andri-fluidable-10d8026/fluidable-min.css',__FILE__ ) );
+	wp_enqueue_style( 'fluidable-grid-css' );
+	wp_register_style('simp-ec-custom-css', plugins_url('public/css/main.min.css',__FILE__ ) );
+	wp_enqueue_style( 'simp-ec-custom-css' );
+
+}
+
+add_action('admin_enqueue_scripts', 'simp_ec_load_custom_assets');
+
+//Assets for the front end
+function simp_ec_load_custom_assets_front_end() {
+    wp_register_style('fluidable-grid-css', plugins_url('public/andri-fluidable-10d8026/fluidable-min.css',__FILE__ ) );
+	wp_enqueue_style( 'fluidable-grid-css' );
+	wp_register_style('simp-ec-custom-css', plugins_url('public/css/main.min.css',__FILE__ ) );
+	wp_enqueue_style( 'simp-ec-custom-css' );
+}
+add_action( 'wp_enqueue_scripts', 'simp_ec_load_custom_assets_front_end' );
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/plugin-activator.php
  */
-
-function simp_ec_load_custom_assets() {
-		wp_register_style('fluidable-grid-css', plugins_url('public/andri-fluidable-10d8026/fluidable-min.css',__FILE__ ) );
-    	wp_enqueue_style( 'fluidable-grid-css' );
-    	wp_register_style('simp-ec-custom-css', plugins_url('public/css/main.min.css',__FILE__ ) );
-    	wp_enqueue_style( 'simp-ec-custom-css' );
-    	//wp_register_style('skeleton-css', plugins_url('public/Skeleton-2.0.4/css/skeleton.css',__FILE__ ) );
-    	//wp_register_style('skeleton-normalize-css', plugins_url('public/Skeleton-2.0.4/css/skeleton.css',__FILE__ ));
-		//wp_enqueue_style( 'skeleton-css' );
-    	//wp_enqueue_style( 'skeleton-normalize-css' );
-}
-
-add_action('admin_enqueue_scripts', 'simp_ec_load_custom_assets');
-
 function simp_ec_activate_plugin() {
 
 	$new_version = '2.0.0';
@@ -90,6 +95,20 @@ function simp_ec_activate_plugin() {
     //flush_rewrite_rules();
 }
 register_activation_hook( __FILE__, 'simp_ec_activate_plugin' );
+
+function shop_page_template( $template ) {
+
+	if ( is_page( 'shop' )  ) {
+		$new_template = SIMPLIFIED_ECOMMERCE_ROOT_PATH. 'includes/templates/template-shop.php';
+		if ( '' != $new_template ) {
+			return $new_template ;
+		}
+	}
+
+	return $template;
+}
+
+add_filter( 'template_include', 'shop_page_template', 99 );
 
 /**
  * The code that runs during plugin deactivation.

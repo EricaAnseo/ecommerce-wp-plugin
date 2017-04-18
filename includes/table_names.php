@@ -13,6 +13,7 @@
 	$table_pv = $wpdb->prefix . "simp_ec_product_variable"; 
 	$table_order = $wpdb->prefix . "simp_ec_order"; 
 	$table_customer = $wpdb->prefix . "simp_ec_customer";
+	$table_options = $wpdb->prefix . "simp_ec_options";
 	$charset_collate = $wpdb->get_charset_collate(); 
 
 	//table created for test purposes
