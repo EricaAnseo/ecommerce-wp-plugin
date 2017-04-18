@@ -14,7 +14,6 @@ function simp_ec_options_page()
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_manage_category.php');
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_manage_attribute.php');
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_manage_product_type.php');
-	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_manage_stock.php');
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/settings_page.php');
 
 	//Name of the parent menu item
@@ -71,15 +70,6 @@ function simp_ec_options_page()
 		'manage_options', 
 		'manage_variable_product', 
 		'simp_ec_manage_variable_products_html' 
-	);
-
-	add_submenu_page( 
-		$parent_page, 
-		'Manage Stock', 
-		'Stock', 
-		'manage_options', 
-		'manage_stock', 
-		'simp_ec_manage_stock_page_html'
 	);
 
 	add_submenu_page( 

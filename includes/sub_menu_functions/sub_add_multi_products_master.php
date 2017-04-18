@@ -106,95 +106,95 @@ function simp_ec_add_multiple_products_html()
 
 				        if (!empty($ptype[$i]))
 				   		{
-
-					        foreach($product_types as $ptypes)
+				   			$foreign_key_type = $wpdb->get_results( 'SELECT * FROM ' . $table_pt . ' WHERE ptype_name = "' . $ptype[$i] . '"');
+					        if($foreign_key_type)
 					        {
-					        	if($ptypes->ptype_name != $ptype[$i])
-					        	{
-					        		$query_type = array('ptype_id' => $lastid,
-									'ptype_name' => $ptype[$i],
-									'ptype_desc' => '');
-					        		$wpdb->insert($table_pt, $query_type, null);
+				        		$foreign_key_product = $wpdb->get_results( 'SELECT * FROM ' . $table_product . ' WHERE pname = "' . $pname[$i] . '"');
 
-					        		$foreign_key_type = $wpdb->get_results( 'SELECT * FROM ' . $table_pt . ' WHERE ptype_name = "' . $ptype[$i] . '"');
-					        		$foreign_key_product = $wpdb->get_results( 'SELECT * FROM ' . $table_product . ' WHERE pname = "' . $pname[$i] . '"');
+				        		$fk_pt_at_join = $wpdb->get_results( 'SELECT * FROM ' . $table_pt . ' JOIN ' . $table_pat . ' ON ' .  $table_pat .'.pattribute_id = ' . $table_pt . '.pattribute_id WHERE ptype_name = "' . $ptype[$i] . '"');
 
-					        		foreach( $foreign_key_type as $product_type ) {
-					        			foreach( $foreign_key_product as $product ) {
-						        			$query_variable_product = array(
-						        					'vproduct_id' => $lastid,
-						        					'ptype_id' => $product_type->ptype_id,
-						        					'product_id' => $product->product_id);
-											$wpdb->insert($table_pv, $query_variable_product, null);
-										}
-					        		}
-					        	}
-					        	else 
-					        	{
-					        		$foreign_key_type = $wpdb->get_results( 'SELECT * FROM ' . $table_pt . ' WHERE ptype_name = "' . $ptype_name[$i] . '"');
-					        		$foreign_key_product = $wpdb->get_results( 'SELECT * FROM ' . $table_product . ' WHERE pname = "' . $pname[$i] . '"');
+			        			foreach( $foreign_key_product as $product ) {
+			        				foreach( $fk_pt_at_join as $product_att_type ) {
+				        				
+					        			$query_variable_product = array(
+					        					'vproduct_id' => $lastid,
+					        					'ptype_id' => $product_att_type->ptype_id,
+					        					'product_id' => $product->product_id,
+					        					'p_attribute' => $product_att_type->pattribute_id);
+										$wpdb->insert($table_pv, $query_variable_product, null);
+									}
+				        		}
 
-					        		foreach( $foreign_key_type as $product_type ) {
-					        			foreach( $foreign_key_product as $product ) {
-						        			$query_variable_product = array(
-						        					'vproduct_id' => $lastid,
-						        					'ptype_id' => $product_type->ptype_id,
-						        					'product_id' => $product->product_id,
-						        					'p_attribute' => 2);
-											$wpdb->insert($table_pv, $query_variable_product, null);
-										}
-					        		}
-					        	}
+				        	}
+					        	
+				        	else 
+				        	{
 
-					        }
+				        		$query_type = array('ptype_id' => $lastid,
+								'ptype_name' => $ptype[$i],
+								'ptype_desc' => '');
+				        		$wpdb->insert($table_pt, $query_type, null);
+				        		
+				        		$foreign_key_product = $wpdb->get_results( 'SELECT * FROM ' . $table_product . ' WHERE pname = "' . $pname[$i] . '"');
+				        		$foreign_key_ptype = $wpdb->get_results( 'SELECT * FROM ' . $table_pt . ' WHERE ptype_name = "' . $ptype[$i] . '"');
+
+			        			foreach( $foreign_key_product as $product ) {
+			        				foreach( $foreign_key_ptype as $product_type ) {
+					        			$query_variable_product = array(
+					        					'vproduct_id' => $lastid,
+					        					'ptype_id' => $product_type->ptype_id,
+					        					'product_id' => $product->product_id, 
+					        					'pattribute_id' => 2);
+										$wpdb->insert($table_pv, $query_variable_product, null);
+									}
+				        		}
+				        	}    
 
 				    	}
 
 				    	if (!empty($category[$i]))
 				   		{
-				   			foreach($categories as $cat)
+				   			$result_categories = $wpdb->get_results( 'SELECT * FROM ' . $table_pc . ' WHERE pcat_name = "' . $category[$i] . '"');
+				   			if($result_categories)
 					        {
-					        	if($cat->pcat_name != $category[$i])
-					        	{
-					        		$query_category = array('pcat_id' => $lastid, 
-									'pcat_name' => $category[$i],
-									'pcat_slug' => $category[$i]);
+					        	
+				        		$foreign_key_produ = $wpdb->get_results( 'SELECT * FROM ' . $table_product . ' WHERE pname = "' . $pname[$i] . '"');
 
-							        $wpdb->insert($table_pc, $query_category, null);
+				        		foreach( $result_categories as $fk_category ) {
+				        			foreach( $foreign_key_produ as $fk_product ) {
+				        				$query_product_cat = array(
+					        					'pcat_id' => $fk_category->pcat_id,
+					        					'product_id' => $fk_product->product_id);
+										$wpdb->insert($table_pcs, $query_product_cat, null);
+				        			}
+				        		}
+					        	
+				        	}
 
-							        $foreign_key_category = $wpdb->get_results( 'SELECT * FROM ' . $table_pc . ' WHERE pcat_name = "' . $ptype[$i] . '"');
-					        		$foreign_key_produ = $wpdb->get_results( 'SELECT * FROM ' . $table_product . ' WHERE pname = "' . $pname[$i] . '"');
+				        	else
+				        	{
+			        		 	$query_category = array('pcat_id' => $lastid, 
+								'pcat_name' => $category[$i],
+								'pcat_slug' => $category[$i]);
 
-					        		foreach( $foreign_key_category as $fkcategory ) {
-					        			foreach( $foreign_key_produ as $prod ) {
-					        				$query_product_cat = array(
-						        					'pcat_id' => $fkcategory->pcat_id,
-						        					'product_id' => $prod->product_id);
-											$wpdb->insert($table_pcs, $query_product_cat, null);
-					        			}
-					        		}
-				
-					        	}
+						        $wpdb->insert($table_pc, $query_category, null);
 
-					        	else
-					        	{
-				        		 	$foreign_key_category = $wpdb->get_results( 'SELECT * FROM ' . $table_pc . ' WHERE pcat_name = "' . $category[$i] . '"');
-					        		$foreign_key_produ = $wpdb->get_results( 'SELECT * FROM ' . $table_product . ' WHERE pname = "' . $pname[$i] . '"');
+						        $foreign_key_category = $wpdb->get_results( 'SELECT * FROM ' . $table_pc . ' WHERE pcat_name = "' . $category[$i] . '"');
+				        		$foreign_key_produ = $wpdb->get_results( 'SELECT * FROM ' . $table_product . ' WHERE pname = "' . $pname[$i] . '"');
 
-					        		foreach( $foreign_key_category as $fk_category ) {
-					        			foreach( $foreign_key_produ as $fk_product ) {
-					        				$query_product_cat = array(
-						        					'pcat_id' => $fk_category->pcat_id,
-						        					'product_id' => $fk_product->product_id);
-											$wpdb->insert($table_pcs, $query_product_cat, null);
-					        			}
-					        		}
-					        	}
-					        }
+				        		foreach( $foreign_key_produ as $prod ) {
+				        			foreach( $foreign_key_category as $fkcategory ) {
+				        				$query_product_cat = array(
+					        					'pcat_id' => $fkcategory->pcat_id,
+					        					'product_id' => $prod->product_id);
+										$wpdb->insert($table_pcs, $query_product_cat, null);
+				        			}//foreach fkcategory
+				        		}//foreach prod
+				        	}//else
 
-				   		}
+				   		}//if not empty
 					
-					} 					
+					}//if values not empty 					
 
 				}
 

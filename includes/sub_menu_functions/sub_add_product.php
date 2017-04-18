@@ -18,7 +18,7 @@ function simp_ec_products_page_html()
 	        <form action="#add_product" method="post" name="add_product">
 				<div class="col-group">
 	                <span class="col-dt-6">
-	                	<input id="pname" placeholder="Product Name" style="width: 100%; resize: none; " type="text" name="pname" ></textarea>
+	                	<input id="pname" placeholder="Product Name" style="width: 100%; resize: none; " type="text" name="pname" />
 	                	<div class="col-group">
 		                	<span class="col-dt-6">
 		            			<input id="sku" placeholder="SKU" style="width: 100%;" type="text" name="sku"/>
@@ -33,7 +33,22 @@ function simp_ec_products_page_html()
 	            		<textarea id="category" placeholder="Category" class="simp_ec_textarea" type="text" name="category" ></textarea>
 	            	</span>
 	            	<span class="col-dt-6">
-	            		
+	            		<h3>Name: </h3>
+	            		<span class="simp_ec_add_single_product_name"></span>
+	            		<div class="col-group">
+	            			<span class="col-dt-6">
+	            				<h3>SKU: </h3>
+	            				<span class="simp_ec_add_single_product_sku"></span>
+		            		</span>
+		            		<span class="col-dt-6">
+		            			<h3>Price: </h3>
+		            			<span class="simp_ec_add_single_product_price"></span>
+		            		</span>
+	            		</div>
+	            		<h3>Short Description: </h3>
+	            		<span class="simp_ec_add_single_product_short_desc"></span>
+	            		<h3>Description: </h3>
+	            		<span class="simp_ec_add_single_product_desc"></span>
 	            	</span>
 	            </div>
 				<input type="submit" value="Submit" class="button button-primary" />

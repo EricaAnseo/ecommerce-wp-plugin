@@ -1,1 +1,1 @@
-(function(){var l;l=function(l){return"Hello "+l+"!"},console.log(l("Erica Chai"))}).call(this);
+(function(){}).call(this);
