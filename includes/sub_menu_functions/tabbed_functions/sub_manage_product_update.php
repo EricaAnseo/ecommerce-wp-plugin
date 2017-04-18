@@ -20,7 +20,6 @@
 			<th>Description</th>
 			<th>Product Type</th>
 			<th>Category</th>
-			<th class="column_delete"></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -58,11 +57,11 @@
 							}
 						} ?></textarea>
 				</td>
-				<td></td>
 			</tr>
 		
-<?php 	} //foreach result as product ?>
-	
+<?php 	} //foreach result as product 
+	} //if results
+?>
 	</tbody>
 	<tfoot>
 		<tr>
@@ -76,7 +75,6 @@
             <th>Description</th>
             <th>Product Type</th>
            	<th>Category</th>
-           	<th class="column_delete"></th>
 		</tr>
 	</tfoot>
 </table>
@@ -84,12 +82,8 @@
 </form>
 
 
-<?php	} //if results
+<?php	
 
-	else{
-		echo "</tbody></table>";
-		echo "<p>You currently have no products added.</p>"; 
-	}
 
 	if(isset($_POST['update_products_button']))
 	{

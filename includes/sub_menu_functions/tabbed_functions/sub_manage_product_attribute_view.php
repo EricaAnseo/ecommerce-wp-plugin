@@ -4,15 +4,15 @@
  * @package		Simplified_Ecommerce
 **/
 ?>  
+<form id="delete_product_attribute_form" action="#delete-product_attribute" method="post" onsubmit="return confirm('Are you sure you want to delete these product attributes?');">
 <table class="wp-list-table widefat fixed">
 	<thead>
 		<tr>
 			<td class="manage-column column-cb check-column">
-				<input style="display: block;" type="checkbox" name="bulk-delete[]" value="" />
+				<input type="checkbox" name="bulk-delete[]" value="" />
 			</td>
 			<th class="manage-column column-title column-primary"><a href="">Product Type Name</a></th>
 			<th><a href="">Product Type Attribute</a></th>
-			<th class="column_delete"></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -21,10 +21,11 @@
 		foreach ( $results_join as $product_attribute_type){ 
 ?>
 		<tr>
-			<td><input type="checkbox" name="bulk-delete[<?php echo $product_type->ptype_id ?>]" value="bulk-delete[<?php echo $product->ptype_id ?>]" /></td>
+			<th class="check-column">
+				<input type="checkbox" name="bulk-delete[]" value="<?php echo $product_attribute_type->pattribute_id ?>" />
+				</th>
 			<td><?php echo $product_attribute_type->ptype_name ?></td>
 			<td><?php echo $product_attribute_type->pattribute_name ?></td>
-			<td></td>
 		</tr>
 
 <?php
@@ -36,11 +37,32 @@
 	<tfoot>
 		<tr>
 			<td class="manage-column column-cb check-column">
-				<input style="display: block;" type="checkbox" name="bulk-delete[]" value="" />
+				<input type="checkbox" name="bulk-delete[]" value="" />
 			</td>
 			<th class="manage-column column-title column-primary"><a href="">Product Type Name</a></th>
 			<th><a href="">Product Type Attribute</a></th>
-			<th class="column_delete"></th>
 		</tr>
 	</tfoot>
 </table>
+<input type="submit" name="delete_checked_product_attribute_button" value="Delete" id="delete_checked_product_attribute" class="button button-primary simp_ec_btn_submit" />
+</form>
+<?php	
+
+	if(isset($_POST['delete_checked_product_attribute_button']))
+	{
+		echo '<h2>Delete button clicked</h2>';
+
+		if(isset($_POST['bulk-delete'])) { 
+		$buik_delete = $_POST['bulk-delete'];
+
+			foreach ( $buik_delete as $delete_variable )
+			{
+				$wpdb->delete( $table_pt, array( 'ptype_id' => $delete_variable ) );
+				echo "<meta http-equiv='refresh' content='0'>";
+			}
+
+		}
+
+	}
+
+?>

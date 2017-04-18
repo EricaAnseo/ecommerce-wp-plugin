@@ -21,7 +21,7 @@ function simp_ec_manage_attribute_page_html()
 
 	<?php 
 		if( $active_tab == 'tab_product_attribute_add' ) { ?>
-        	<div class="add-rows" style="display:inline-block; padding-top: 8px; padding-left: 10px; float: right;">
+        	<div class="add-rows" style="display:inline-block; padding-top: 8px; padding-left: 10px;">
 	        	<input style="width:55px;" id="rows" type="number" name="number_of_rows" min="0" />
 	        	<a href="" style=" padding-top: 4px;" class="page-title-action">Add Rows</a>	
 	        </div>

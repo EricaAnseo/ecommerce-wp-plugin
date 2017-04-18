@@ -41,7 +41,10 @@ function simp_ec_manage_category_page_html()
 	        }  
 	        else {
 	            include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/sub_menu_functions/tabbed_functions/sub_manage_category_update.php');
-	        } 
+	        }
+	?>
+	</div>
+<?php 	
 }
 
 ?>

@@ -13,7 +13,6 @@
 				<th class="manage-column column-title column-primary">Product Type Name</th>
 				<th>Product Type Description</th>
 				<th>Product Type Attributes</th>
-				<th class="column_delete"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -25,12 +24,11 @@
 				<td class="simp_ec_column_insert"><textarea id="ptype_name" class="simp_ec_textarea" type="text" name="ptype_name[<?php echo $product_type->ptype_id ?>]" ><?php echo $product_type->ptype_name ?></textarea></td>
 				<td class="simp_ec_column_insert"><textarea id="ptype_desc" class="simp_ec_textarea" type="text" name="ptype_desc[<?php echo $product_type->ptype_id ?>]" ><?php echo $product_type->ptype_desc ?></textarea></td>
 				<td class="simp_ec_column_insert"><textarea id="pattribute_name" class="simp_ec_textarea" type="text" name="pattribute_name[<?php echo $product_type->ptype_id ?>]" ><?php foreach ($results_join as $product_attribute){ 
-				if($product_attribute->ptype_id == $product_type->ptype_id)
-				{
-					echo $product_attribute->pattribute_name . ', ';
-				}
-			} ?></textarea></td>
-				<td class="simp_ec_column_insert"></td>
+					if($product_attribute->ptype_id == $product_type->ptype_id)
+					{
+						echo $product_attribute->pattribute_name . ', ';
+					}
+				} ?></textarea></td>
 			</tr>
 
 	<?php
@@ -45,7 +43,6 @@
 				<th class="manage-column column-title column-primary">Product Type Name</th>
 				<th>Product Type Description</th>
 				<th>Product Type Attributes</th>
-				<th class="column_delete"></th>
 			</tr>
 		</tfoot>
 	</table>

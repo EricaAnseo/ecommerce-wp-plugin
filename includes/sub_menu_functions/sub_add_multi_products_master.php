@@ -19,6 +19,12 @@ function simp_ec_add_multiple_products_html()
         <h1 class="wp-heading-inline"><?php echo get_admin_page_title(); ?></h1>
         <!-- <form class="simp_ec_form" action="#add_products" method="post" name="add_products"> -->
         <!-- <input type="submit" style="" value="Add Products" class="page-title-action" /> -->
+        <div class="add-rows" style="display:inline-block; padding-top: 8px; padding-left: 10px;">
+        	<form id="add_rows" action="#add_rows" method="post">
+        		<input style="width:55px;" id="rows" type="number" name="number_of_rows" />
+        		<input type="submit" style=" padding-top: 4px;" name="add_new_rows" value="Add Rows" class="page-title-action" />
+        	</form>
+        </div>
         <span style="float:right;"> 
 	        <div class="insert-product-display" style="display:inline-block; padding-top: 18px;">
 	        	<a href="?page=add_multiple_product&tab=tab_table_view" class="page-title-action <?php echo $active_tab == 'tab_table_view' ? 'nav-tab-active' : ''; ?>">
@@ -27,12 +33,6 @@ function simp_ec_add_multiple_products_html()
 	        	<a href="?page=add_multiple_product&tab=tab_list_view" class="page-title-action <?php echo $active_tab == 'tab_list_view' ? 'nav-tab-active' : ''; ?>">
 	        		<span class="dashicons dashicons-editor-ul"></span> List
 	        	</a>
-	        </div>
-	        <div class="add-rows" style="display:inline-block; padding-top: 8px; padding-left: 10px;">
-	        	<form id="add_rows" action="#add_rows" method="post">
-	        		<input style="width:55px;" id="rows" type="number" name="number_of_rows" />
-	        		<input type="submit" style=" padding-top: 4px;" name="add_new_rows" value="Add Rows" class="page-title-action" />
-	        	</form>
 	        </div>
 	    </span>
         <hr class="wp-header-end">

@@ -9,10 +9,12 @@ function simp_ec_manage_products_page_html()
 	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/table_names.php');
 	$active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'tab_view_products';
 	$sort_by = isset( $_GET[ 'sort' ] ) ? $_GET[ 'sort' ] : 'sort_by_id';
-	$select_query = 'SELECT * FROM ' . $table_product . ' ORDER BY pprice DESC';
+	$select_query = 'SELECT * FROM ' . $table_product;
 
 	if( $sort_by == 'sort_by_name' ) {
-    	$select_query = 'SELECT * FROM ' . $table_product . ' ORDER BY pprice';
+    	$select_query = 'SELECT * FROM ' . $table_product . ' ORDER BY pname';
+    } else if( $sort_by == 'sort_by_price' ) {
+    	$select_query = 'SELECT * FROM ' . $table_product . ' ORDER BY product_sku';
     } else {
         $select_query = 'SELECT * FROM ' . $table_product;
     } 
@@ -48,6 +50,10 @@ function simp_ec_manage_products_page_html()
         <?php settings_errors(); 
         	if( isset( $_GET[ 'tab' ] ) ) {
 			    $active_tab = $_GET[ 'tab' ];
+			} // end if
+
+			if( isset( $_GET[ 'sort' ] ) ) {
+			    $sort_by = $_GET[ 'sort' ];
 			} // end if
 
 	        if( $active_tab == 'tab_view_products' ) {

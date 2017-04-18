@@ -11,7 +11,6 @@
 				<td class="manage-column column-cb check-column"></td>
 				<th class="manage-column column-title column-primary">Product Type Name</th>
 				<th>Product Type Attribute</th>
-				<th class="column_delete"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -28,7 +27,6 @@
 				<td class="simp_ec_column_insert">
 					<textarea id="pattribute_name" class="simp_ec_textarea" type="text" style="background-color:#F5F5F5;" name="pattribute_name[<?php echo $product_attribute_type->pattribute_id ?>]" ><?php echo $product_attribute_type->pattribute_name ?></textarea>
 				</td>
-				<td></td>
 			</tr>
 
 	<?php
@@ -42,7 +40,6 @@
 				<td class="manage-column column-cb check-column"></td>
 				<th class="manage-column column-title column-primary">Product Type Name</th>
 				<th>Product Type Attribute</th>
-				<th class="column_delete"></th>
 			</tr>
 		</tfoot>
 	</table>

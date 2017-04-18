@@ -11,14 +11,13 @@
 				<td class="manage-column column-cb check-column"></td>
 				<th class="manage-column column-title column-primary">Product Type Name</th>
 				<th>Product Type Attribute</th>
-				<th class="column_delete"></th>
 			</tr>
 		</thead>
 		<tbody>
 		<?php
 		for ($i=0; $i< $rows; $i++){ ?>
 			<tr class="simp_ec_row_insert">
-				<td></td>
+				<td ></td>
 				<td class="simp_ec_column_insert">
 					<select>
 						<option value=''></option>
@@ -32,7 +31,6 @@
 				<td class="simp_ec_column_insert">
 					<textarea id="pattribute_name" class="simp_ec_textarea" type="text" style="background-color:#F5F5F5;" name="pattribute_name[<?php echo $i;?>]" ></textarea>
 				</td>
-				<td></td>
 			</tr>
 	<?php
 		} //for
@@ -43,7 +41,6 @@
 				<td class="manage-column column-cb check-column"></td>
 				<th class="manage-column column-title column-primary">Product Type Name</th>
 				<th>Product Type Attribute</th>
-				<th class="column_delete"></th>
 			</tr>
 		</tfoot>
 	</table>
