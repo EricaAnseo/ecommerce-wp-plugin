@@ -58,7 +58,8 @@
 						} ?>
 				</td>
 			</tr>
-<?php 	} ?>
+<?php 	} 
+	} ?>
 
 		</tbody>
 		<tfoot>
@@ -78,13 +79,7 @@
 	</table>
 	<input type="submit" name="delete_checked_product_button" value="Delete" id="delete_checked_product" class="button button-primary simp_ec_btn_submit" />
 </form>
-<?php	} 
-
-	else{
-		echo "</tbody></table>";
-		echo '<p>You currently have no products added.</p>'; 
-	}
-
+<?php	 
 
 	if(isset($_POST['delete_product_btn'])) { 
 		$delete_product_id = $_POST['delete_product_id'];

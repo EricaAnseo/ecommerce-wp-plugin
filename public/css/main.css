@@ -59,6 +59,11 @@ thead .column_delete {
   float: right;
   margin-top: 15px !important; }
 
+.simp_ec_table_view .simp_ec_column_insert select,
+.simp_ec_table_update .simp_ec_column_update select {
+  width: 100%;
+  height: 50px; }
+
 /*
 *
 * Shop Template

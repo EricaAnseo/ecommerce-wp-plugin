@@ -58,8 +58,6 @@
 
 	if(isset($_POST['delete_checked_variable_product_button']))
 	{
-		echo '<h2>Delete button clicked</h2>';
-
 		if(isset($_POST['bulk-delete'])) { 
 		$buik_delete = $_POST['bulk-delete'];
 

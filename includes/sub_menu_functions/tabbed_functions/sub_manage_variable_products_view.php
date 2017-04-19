@@ -51,15 +51,8 @@
 	<input type="submit" name="delete_checked_variable_product_button" value="Delete" id="delete_checked_product" class="button button button-primary simp_ec_btn_submit" />
 </form>
 <?php 
-	if(isset($_POST['delete_checked_variable_product_button'])) { 
-		//$delete_variable_product_id = $_POST['delete_product_id'];
-		//$wpdb->delete( $table_pv, array( 'vproduct_id' => $delete_product_id ) );
-		//echo "<meta http-equiv='refresh' content='0'>";
-	}
-
 	if(isset($_POST['delete_checked_variable_product_button']))
 	{
-		echo '<h2>Delete button clicked</h2>';
 
 		if(isset($_POST['bulk-delete'])) { 
 		$buik_delete = $_POST['bulk-delete'];

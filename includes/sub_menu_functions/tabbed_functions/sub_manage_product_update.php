@@ -5,14 +5,11 @@
 **/
 ?>
 
-
 <table class="wp-list-table widefat fixed simp_ec_table_update">
 	<form action="#manage_product" method="post" id="manage_product" name="manage_product">
 	<thead>
 		<tr>
-			<td class="manage-column column-cb check-column">
-			
-			</td>
+			<td class="manage-column column-cb check-column"></td>
 			<th class="manage-column column-title column-primary"><a href="<?php //'page=simplified-ecommerce?sort=name'?>">Name</a></th>
 			<th class="table_head_sku"><a href="#sort=name">SKU</a></th>
 			<th class="table_head_price">Price (&euro;)</th>
@@ -23,15 +20,9 @@
 		</tr>
 	</thead>
 	<tbody>
-<?php if($results){ ?>
-
-		<!-- <form action="#checked_product" method="post" id="checked_product" name="checked_product"> -->
-
-<?php
-
+<?php if($results){ 
 		foreach ( $results as $product ){ 
 ?>
-			
 			<tr class="simp_ec_row_update">
 				<td></td>
 				<td class="simp_ec_column_update"><textarea id="pname" class="simp_ec_textarea" type="text" name="pname[<?php echo $product->product_id ?>]" ><?php echo $product->pname ?></textarea></td>
@@ -39,7 +30,7 @@
 				<td class="simp_ec_column_update"><input id="pprice" type="number" class="simp_ec_input_number" name="pprice[<?php echo $product->product_id ?>]" value="<?php echo $product->pprice ?>" /></td>
 				<td class="simp_ec_column_update"><textarea id="pshortdesc" class="simp_ec_textarea" type="text" name="pshortdesc[<?php echo $product->product_id ?>]" ><?php echo $product->pshortdesc ?></textarea></td>
 				<td class="simp_ec_column_update"><textarea id="pdesc" class="simp_ec_textarea" type="text" name="pdesc[<?php echo $product->product_id ?>]" ><?php echo $product->pdesc ?></textarea></td>
-				<td class="simp_ec_column_update"><textarea class="simp_ec_textarea" type="text"><?php 
+				<td class="simp_ec_column_update"><textarea class="simp_ec_textarea" type="text" name="product_type[<?php echo $product->product_id ?>]" ><?php 
 						foreach($results_product_type as $ptype)
 						{
 							if ($product->product_id == $ptype->product_id) {
@@ -48,7 +39,7 @@
 							}
 						} ?></textarea></td>
 				<td class="simp_ec_column_update" > 
-					<textarea class="simp_ec_textarea" type="text" ><?php 
+					<textarea class="simp_ec_textarea" type="text" name="product_category[<?php echo $product->product_id ?>]"><?php 
 						foreach($results_product_category as $pcategory)
 						{
 							if ($product->product_id == $pcategory->product_id) { 
@@ -81,17 +72,17 @@
 <input type="submit" name="update_products_button" value="Update" class="button button-primary simp_ec_btn_submit" />
 </form>
 
-
 <?php	
-
 
 	if(isset($_POST['update_products_button']))
 	{
-		$pname = array_map( 'esc_attr', $_POST['pname'] );
-		$product_sku = array_map( 'esc_attr', $_POST['product_sku'] );	
-		$pprice = array_map( 'esc_attr', $_POST['pprice'] );
-		$pshortdesc = array_map( 'esc_attr', $_POST['pshortdesc'] );
-		$pdesc = array_map( 'esc_attr', $_POST['pdesc'] );
+		$pname = array_map( 'sanitize_text_field', $_POST['pname'] );
+		$product_sku = array_map( 'sanitize_text_field', $_POST['product_sku'] );	
+		$pprice = array_map( 'sanitize_text_field', $_POST['pprice'] );
+		$pshortdesc = array_map( 'sanitize_text_field', $_POST['pshortdesc'] );
+		$pdesc = array_map( 'sanitize_text_field', $_POST['pdesc'] );
+		$product_type = array_map( 'sanitize_text_field', $_POST['pdesc'] );
+		$product_category = array_map( 'sanitize_text_field', $_POST['pdesc'] );
 
 		if($results)
 		{

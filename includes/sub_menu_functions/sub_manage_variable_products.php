@@ -9,6 +9,8 @@ function simp_ec_manage_variable_products_html()
 	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/table_names.php');
 	$active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'tab_view_variable_product';
 	$results_variable_product = $wpdb->get_results( 'SELECT * FROM ' . $table_pv . ' JOIN ' . $table_pt . ' ON ' .  $table_pt .'.ptype_id = ' . $table_pv . '.ptype_id JOIN ' . $table_product . ' ON ' .  $table_product .'.product_id = ' . $table_pv . '.product_id JOIN ' . $table_pa . ' ON ' . $table_pv . '.pattribute_id = ' . $table_pa . '.pattribute_id');
+	$results_attribute = $wpdb->get_results( 'SELECT * FROM ' . $table_pa . ' JOIN ' . $table_pat . ' ON ' .  $table_pat . '.pattribute_id = ' . $table_pa . '.pattribute_id');
+	$results_parent = $wpdb->get_results( 'SELECT * FROM ' . $table_product);
 	$rows = 5; 
 	$count = 0;
 ?>

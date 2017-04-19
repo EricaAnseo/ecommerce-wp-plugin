@@ -20,7 +20,7 @@
 				<td ></td>
 				<td class="simp_ec_column_insert">
 					<select>
-						<option value=''></option>
+						<option value=""></option>
 <?php 
 						foreach ( $results_ptype as $product_type ){
 							echo '<option value="' . $product_type->ptype_id . '">' . $product_type->ptype_name . '</option>';
