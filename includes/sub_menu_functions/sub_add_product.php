@@ -7,9 +7,9 @@
 function simp_ec_products_page_html()
 {
     // check user capabilities
-    /*if (!current_user_can('manage_options')) {
+    if (!current_user_can('manage_options')) {
         return;
-    }*/ 
+    }
 
     ?>
     <div class="wrap simp_ec_container">
@@ -27,8 +27,8 @@ function simp_ec_products_page_html()
 		            			<input id="pprice" placeholder="Price" style="width: 100%;" min="0" placeholder="0" type="number" name="pprice" />
 		            		</span>
 		            	</div>
-	            		<textarea id="pshortdesc" placeholder="Short Description" style="width: 100%; height:70px;" type="text" name="pshortdesc"></textarea>
-	            		<textarea id="pdesc" placeholder="Description" style="width: 100%; height:70px;" name="pdesc"></textarea>
+	            		<textarea id="pshortdesc" placeholder="Short Description" class="simp_ec_textarea" type="text" name="pshortdesc"></textarea>
+	            		<textarea id="pdesc" placeholder="Description" class="simp_ec_textarea" name="pdesc"></textarea>
 	            		<textarea id="ptype" placeholder="Product Type" class="simp_ec_textarea" type="text" name="ptype" ></textarea>
 	            		<textarea id="category" placeholder="Category" class="simp_ec_textarea" type="text" name="category" ></textarea>
 	            		<input type="submit" value="Add Product" class="button button-primary simp_ec_btn_submit" />

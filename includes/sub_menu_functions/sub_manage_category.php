@@ -14,6 +14,12 @@ function simp_ec_manage_category_page_html()
 
 	<div class="wrap simp_ec_container">
     	<h1 class="wp-heading-inline"><?php echo get_admin_page_title(); ?></h1>
+    	 <?php if( $active_tab == 'tab_add_category' ) { ?>
+            <div class="add-rows" style="display:inline-block; padding-top: 8px; padding-left: 10px;">
+                <input style="width:55px;" id="rows" type="number" name="number_of_rows" min="0" />
+                <a href="" style=" padding-top: 4px;" class="page-title-action">Add Rows</a>    
+            </div>
+   		<?php } ?>
         <span style="float:right;"> 
 	        <div class="insert-product-display" style="display:inline-block; padding-top: 18px;">
 	        	<a href="?page=add_category_sub&tab=tab_view_category" class="page-title-action <?php echo $active_tab == 'tab_view_category' ? 'nav-tab-active' : ''; ?>">

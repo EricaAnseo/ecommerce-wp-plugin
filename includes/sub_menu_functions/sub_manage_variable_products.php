@@ -11,12 +11,18 @@ function simp_ec_manage_variable_products_html()
 	$results_variable_product = $wpdb->get_results( 'SELECT * FROM ' . $table_pv . ' JOIN ' . $table_pt . ' ON ' .  $table_pt .'.ptype_id = ' . $table_pv . '.ptype_id JOIN ' . $table_product . ' ON ' .  $table_product .'.product_id = ' . $table_pv . '.product_id JOIN ' . $table_pa . ' ON ' . $table_pv . '.pattribute_id = ' . $table_pa . '.pattribute_id');
 	$results_attribute = $wpdb->get_results( 'SELECT * FROM ' . $table_pa . ' JOIN ' . $table_pat . ' ON ' .  $table_pat . '.pattribute_id = ' . $table_pa . '.pattribute_id');
 	$results_parent = $wpdb->get_results( 'SELECT * FROM ' . $table_product);
-	$rows = 5; 
+	$rows = 10; 
 	$count = 0;
 ?>
 	<!-- Create a header in the default WordPress 'wrap' container -->
     <div class="wrap simp_ec_container">
         <h1 class="wp-heading-inline"><?php echo get_admin_page_title(); ?></h1>
+        <?php if( $active_tab == 'tab_add_variable_product' ) { ?>
+	        	<div class="add-rows" style="display:inline-block; padding-top: 8px; padding-left: 10px;">
+		        	<input style="width:55px;" id="rows" type="number" name="number_of_rows" min="0" />
+		        	<a href="" style=" padding-top: 4px;" class="page-title-action">Add Rows</a>	
+		        </div>
+	    <?php } ?>
         <span style="float:right;"> 
 	        <div class="insert-product-display" style="display:inline-block; padding-top: 18px;">
 			    <a href="?page=manage_variable_product&tab=tab_view_variable_product" class="page-title-action <?php echo $active_tab == 'tab_view_variable_product' ? 'nav-tab-active' : ''; ?>">

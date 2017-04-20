@@ -7,10 +7,12 @@
 function simp_ec_add_multiple_products_html()
 { 
 	$active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'tab_table_view';
+
+	$rows = isset( $_GET[ 'rows' ] ) ? $_GET[ 'rows' ] : 10;
 	include_once (SIMPLIFIED_ECOMMERCE_ROOT_PATH . 'includes/table_names.php');
 	$product_types = $wpdb->get_results( 'SELECT * FROM ' . $table_pt);
 	$categories = $wpdb->get_results( 'SELECT * FROM ' . $table_pc);
-	$rows = 5;
+	//$rows = 10;
 	$count = 0;
 	$product = array();
 	?>

@@ -48,7 +48,7 @@ function simp_ec_options_page()
 	add_submenu_page( 
 		$parent_page, 
 		'Add Product', 
-		'Product', 
+		'Add Product', 
 		'manage_options', 
 		'add_product_sub', 
 		'simp_ec_products_page_html' 
@@ -57,7 +57,7 @@ function simp_ec_options_page()
 	add_submenu_page( 
 		$parent_page, 
 		'Add Multiple Products', 
-		'Multiple Products', 
+		'Add Multiple Products', 
 		'manage_options', 
 		'add_multiple_product', 
 		'simp_ec_add_multiple_products_html' 

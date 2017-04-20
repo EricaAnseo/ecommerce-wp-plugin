@@ -18,7 +18,6 @@ function simp_ec_manage_attribute_page_html()
 ?>
 	<div class="wrap simp_ec_container">
 	<h1 class="wp-heading-inline"><?php echo get_admin_page_title(); ?></h1> 
-
 	<?php 
 		if( $active_tab == 'tab_product_attribute_add' ) { ?>
         	<div class="add-rows" style="display:inline-block; padding-top: 8px; padding-left: 10px;">
@@ -26,7 +25,6 @@ function simp_ec_manage_attribute_page_html()
 	        	<a href="" style=" padding-top: 4px;" class="page-title-action">Add Rows</a>	
 	        </div>
     <?php } ?>
-
     <span style="float:right;"> 
         <div class="insert-product-display" style="display:inline-block; padding-top: 18px;">
         	<a href="?page=manage_attribute_sub&tab=tab_product_attribute_view" class="page-title-action <?php echo $active_tab == 'tab_product_attribute_view' ? 'nav-tab-active' : ''; ?>">
