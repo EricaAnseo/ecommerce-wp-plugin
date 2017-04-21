@@ -19,7 +19,6 @@ function simp_ec_manage_products_page_html()
         $select_query = 'SELECT * FROM ' . $table_product;
     } 
 
-	
 	$results_product_category = $wpdb->get_results( 'SELECT * FROM ' . $table_pcs . ' JOIN ' . $table_pc . ' ON ' .  $table_pcs .'.pcat_id = ' . $table_pc . '.pcat_id JOIN ' . $table_product . ' ON ' .  $table_product .'.product_id = ' . $table_pcs . '.product_id');
 	$results_product_type = $wpdb->get_results( 'SELECT * FROM ' . $table_pv . ' JOIN ' . $table_product . ' ON ' .  $table_product .'.product_id = ' . $table_pv . '.product_id JOIN ' . $table_pt . ' ON ' .  $table_pt .'.ptype_id = ' . $table_pv . '.ptype_id');
 	$results = $wpdb->get_results($select_query);

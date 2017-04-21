@@ -74,26 +74,33 @@ if(isset($_POST['add_product_types_and_attributes']))
 					'ptype_name' => $ptype_name[$i],
 					'ptype_desc' => $ptype_desc[$i]);
 
-			$query_attribute = array('pattribute_id' => $lastid,
-						'pattribute_name' => $pattribute_name[$i]);
-
 			if (!empty($ptype_name[$i]))
 		    {
 		        $wpdb->insert($table_pt, $query_type, null);
-				$wpdb->insert($table_pa, $query_attribute, null);
 		    }
 
-			$foreign_key_type = $wpdb->get_results( 'SELECT * FROM ' . $table_pt . ' WHERE ptype_name = "' . $ptype_name[$i] . '"');
-			$foreign_attribute_key = $wpdb->get_results( 'SELECT * FROM ' . $table_pa . ' WHERE pattribute_name = "' . $pattribute_name[$i] . '"');
-			
-			foreach( $foreign_key_type as $product_type ) {
-				foreach( $foreign_attribute_key as $product_attribute ) {
-					$query_attribute_types = array('ptype_id' => $product_type->ptype_id,
-							'pattribute_id' => $product_attribute->pattribute_id );
-					$wpdb->insert($table_pat, $query_attribute_types, null);
+			$pattributes = explode(",",$pattribute_name[$i]);
+
+   			foreach($pattributes as $patt)
+   			{
+
+				$query_attribute = array('pattribute_id' => $lastid,
+							'pattribute_name' => $patt);
+
+				$wpdb->insert($table_pa, $query_attribute, null);
+			    		
+
+				$foreign_key_type = $wpdb->get_results( 'SELECT * FROM ' . $table_pt . ' WHERE ptype_name = "' . $ptype_name[$i] . '"');
+				$foreign_attribute_key = $wpdb->get_results( 'SELECT * FROM ' . $table_pa . ' WHERE pattribute_name = "' . $patt . '"');
+				
+				foreach( $foreign_key_type as $product_type ) {
+					foreach( $foreign_attribute_key as $product_attribute ) {
+						$query_attribute_types = array('ptype_id' => $product_type->ptype_id,
+								'pattribute_id' => $product_attribute->pattribute_id );
+						$wpdb->insert($table_pat, $query_attribute_types, null);
+					}
 				}
 			}
-			
 		}
 	}
 

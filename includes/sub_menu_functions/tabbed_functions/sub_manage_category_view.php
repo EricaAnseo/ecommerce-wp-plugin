@@ -54,7 +54,6 @@
 
 <?php
 	
-
 	if(isset($_POST['delete_checked_categories_button']))
 	{
 

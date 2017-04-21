@@ -14,6 +14,7 @@ function simp_ec_options_page()
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_manage_category.php');
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_manage_attribute.php');
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_manage_product_type.php');
+	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_manage_image.php');
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/settings_page.php');
 
 	//Name of the parent menu item
@@ -86,7 +87,7 @@ function simp_ec_options_page()
 		'Manage Attributes', 
 		'Attributes', 
 		'manage_options', 
-		'manage_attribute_sub', 
+		'manage_attributes', 
 		'simp_ec_manage_attribute_page_html'
 	);
 
@@ -95,8 +96,17 @@ function simp_ec_options_page()
 		'Manage Category', 
 		'Category', 
 		'manage_options', 
-		'add_category_sub', 
+		'manage_categories', 
 		'simp_ec_manage_category_page_html'
+	);
+
+	add_submenu_page( 
+		$parent_page, 
+		'Images', 
+		'Images', 
+		'manage_options', 
+		'manage_images', 
+		'simp_ec_manage_images_page_html'
 	);
 
 	add_submenu_page( 

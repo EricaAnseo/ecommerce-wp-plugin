@@ -50,14 +50,12 @@
 
 	if(isset($_POST['delete_checked_product_attribute_button']))
 	{
-		echo '<h2>Delete button clicked</h2>';
-
 		if(isset($_POST['bulk-delete'])) { 
 		$buik_delete = $_POST['bulk-delete'];
 
 			foreach ( $buik_delete as $delete_variable )
 			{
-				$wpdb->delete( $table_pt, array( 'ptype_id' => $delete_variable ) );
+				$wpdb->delete( $table_pa, array( 'pattribute_id' => $delete_variable ) );
 				echo "<meta http-equiv='refresh' content='0'>";
 			}
 

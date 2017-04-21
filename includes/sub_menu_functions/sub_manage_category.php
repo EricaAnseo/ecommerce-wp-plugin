@@ -22,13 +22,13 @@ function simp_ec_manage_category_page_html()
    		<?php } ?>
         <span style="float:right;"> 
 	        <div class="insert-product-display" style="display:inline-block; padding-top: 18px;">
-	        	<a href="?page=add_category_sub&tab=tab_view_category" class="page-title-action <?php echo $active_tab == 'tab_view_category' ? 'nav-tab-active' : ''; ?>">
+	        	<a href="?page=manage_categories&tab=tab_view_category" class="page-title-action <?php echo $active_tab == 'tab_view_category' ? 'nav-tab-active' : ''; ?>">
 	        		<span class="dashicons dashicons-editor-table"></span> View
 	        	</a>
-	        	<a href="?page=add_category_sub&tab=tab_add_category" class="page-title-action <?php echo $active_tab == 'tab_add_category' ? 'nav-tab-active' : ''; ?>">
+	        	<a href="?page=manage_categories&tab=tab_add_category" class="page-title-action <?php echo $active_tab == 'tab_add_category' ? 'nav-tab-active' : ''; ?>">
 	        		<span class="dashicons dashicons-plus"></span> Add
 	        	</a>
-	        	<a href="?page=add_category_sub&tab=tab_edit_category" class="page-title-action <?php echo $active_tab == 'tab_edit_category' ? 'nav-tab-active' : ''; ?>">
+	        	<a href="?page=manage_categories&tab=tab_edit_category" class="page-title-action <?php echo $active_tab == 'tab_edit_category' ? 'nav-tab-active' : ''; ?>">
 	        		<span class="dashicons dashicons-edit"></span> Edit
 	        	</a>
 	        </div>

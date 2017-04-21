@@ -266,7 +266,7 @@ function simp_ec_shortcode_product ($atts)
 						<span class="simp_ec_product_name"><?php echo $product->pname; ?></span>
 					<?php } if(!empty($product->product_sku) && ($simp_ec_att['sku'] != 'hidden')) { ?>
 						<span class="simp_ec_product_sku"><?php echo $product->product_sku; ?></span>
-						<?php } if(!empty($product->pprice)) { ?>	
+						<?php } if(!empty($product->pprice) && ($simp_ec_att['price'] != 'hidden')) { ?>	
 						<span class="simp_ec_product_price"><?php echo $product->pprice; ?></span>
 					<?php } if(!empty($product->pdesc) && ($simp_ec_att['description'] != 'hidden')) { ?>	
 						<span class="simp_ec_product_desc"><?php echo $product->pdesc; ?></span>

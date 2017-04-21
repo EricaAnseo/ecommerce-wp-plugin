@@ -15,5 +15,9 @@
 	//This file contains all of the shortcodes for products. 
 	require_once( plugin_dir_path( __FILE__ ) . 'simp_ec_shortcodes/shortcode_category.php' );
 
+	//This file contains all of the shortcodes for products. 
+	require_once( plugin_dir_path( __FILE__ ) . 'simp_ec_shortcodes/shortcode_variable_products.php' );
+
+
 
 ?>
