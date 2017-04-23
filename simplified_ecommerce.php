@@ -98,11 +98,35 @@ register_activation_hook( __FILE__, 'simp_ec_activate_plugin' );
 
 function shop_page_template( $template ) {
 
+	global $wpdb;
+
+	$options = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . "simp_ec_options");
+
 	if ( is_page( 'shop' )  ) {
-		$new_template = SIMPLIFIED_ECOMMERCE_ROOT_PATH. 'includes/templates/template-shop.php';
-		if ( '' != $new_template ) {
-			return $new_template ;
+		
+		if($options){
+			foreach ($options as $setting) {
+				if($setting->shop_template == 'default'){
+					$default_temp = SIMPLIFIED_ECOMMERCE_ROOT_PATH. 'includes/templates/template-shop.php';
+					if ( '' != $default_temp ) {
+						return $default_temp ;
+					}
+				} else if($setting->shop_template == 'list'){
+					$list_temp = SIMPLIFIED_ECOMMERCE_ROOT_PATH. 'includes/templates/template-shop-list.php';
+					if ( '' != $list_temp ) {
+						return $list_temp ;
+					}
+				}
+			}
 		}
+
+		else{
+			$new_template = SIMPLIFIED_ECOMMERCE_ROOT_PATH. 'includes/templates/template-shop.php';
+			if ( '' != $new_template ) {
+				return $new_template ;
+			}
+		}
+		
 	}
 
 	return $template;

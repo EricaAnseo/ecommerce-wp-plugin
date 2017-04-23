@@ -4,7 +4,7 @@
  * @package		Simplified_Ecommerce
 **/
 
-function simp_ec_options_page() 
+function simp_ec_dashboard_menu() 
 {
 	//including the files which has the function 
 	include_once(plugin_dir_path( __FILE__ ) . '/sub_menu_functions/sub_manage_product.php');
@@ -100,14 +100,14 @@ function simp_ec_options_page()
 		'simp_ec_manage_category_page_html'
 	);
 
-	add_submenu_page( 
+	/*add_submenu_page( 
 		$parent_page, 
 		'Images', 
 		'Images', 
 		'manage_options', 
 		'manage_images', 
 		'simp_ec_manage_images_page_html'
-	);
+	);*/
 
 	add_submenu_page( 
 		$parent_page, 
@@ -121,7 +121,7 @@ function simp_ec_options_page()
 	
 }
 
-add_action('admin_menu', 'simp_ec_options_page');
+add_action('admin_menu', 'simp_ec_dashboard_menu');
 
 
 

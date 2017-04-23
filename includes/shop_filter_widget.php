@@ -12,7 +12,7 @@ class simp_ec_shop_filter_widget extends WP_Widget {
 		'simp_ec_shop_filter_widget', 
 
 		// Widget name will appear in UI
-		__('Simp Ecommerce Shop Filter Widget', 'shop_filter_widget'), 
+		__('Simplified Ecommerce Shop Filter Widget', 'shop_filter_widget'), 
 
 		// Widget description
 		array( 'description' => __( 'Allows the customer to filter through the shop products.', 'shop_filter_widget' ), ) 

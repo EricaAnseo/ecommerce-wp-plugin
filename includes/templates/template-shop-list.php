@@ -1,5 +1,5 @@
 <?php
-// Template Name: Shop Template
+// Template Name: Shop List Template
 get_header(); 
 $results = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . "simp_ec_product");
 ?>
@@ -19,23 +19,23 @@ $results = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . "simp_ec_produ
 					foreach ( $results as $product ){ ?>
 					<span class="simp_ec_product product<?php echo $product->product_id; ?>">
 						<?php if(!empty($product->pname)) { ?>
-							<span class="simp_ec_product_name">
+							<p class="simp_ec_product_name">
 								<h3><?php echo $product->pname; ?></h3>
-							</span>
+							</p>
 						<?php } if(!empty($product->product_sku)) { ?>
-							<span class="simp_ec_product_sku">
+							<p class="simp_ec_product_sku">
 								<span class="simp_ec_product_sku_heading">
 									<strong>SKU: </strong>
 								</span>
 								<?php echo $product->product_sku; ?>
-							</span>
+							</p>
 						<?php } if(!empty($product->pprice)) { ?>	
-							<span class="simp_ec_product_price">
+							<p class="simp_ec_product_price">
 								<span class="simp_ec_product_price_heading">
 									<strong>Price: </strong>
 								</span>
 									<?php echo $product->pprice; ?>
-							</span>
+							</p>
 						<?php } if(!empty($product->pdesc)) { ?>	
 							<span class="simp_ec_product_desc"><?php echo $product->pdesc; ?></span>
 						<?php } ?>
