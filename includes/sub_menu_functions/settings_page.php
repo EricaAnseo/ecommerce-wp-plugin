@@ -10,24 +10,24 @@ function simp_ec_settings_page_html()
         	<?php if($options){ 
         		foreach($options as $opt){?>
 		        <div class="simp_ec_options_container">
-		        		<h3>Business Name</h3>
-		        		<input type="text" name="business_name" value="<?php echo $opt->company_name; ?>" />
-		        		<h3>Business Address</h3>
-		        		<input type="text" name="business_address" value="<?php echo $opt->company_address; ?>"/>
-		        		<h3>Email Address</h3>
-		        		<input type="email" name="email_address" value="<?php echo $opt->company_email; ?>"/>
-		        		<h3>Currency</h3>
-		        		<select name="currency">
-							<option value="euro">Euro (&#128;)</option>
-							<option value="dollar">Dollar (&#x24;)</option>
-							<option value="pound">Sterling (&#xa3;)</option>
-							<option value="yen">Yen (&#xa5;)</option>
-						</select>
-		        		<h3>Template</h3>
-		    			<select name="template">
-		        			<option value="default">Default</option>
-		        			<option value="list">List View</option>
-						</select>
+	        		<h3>Business Name</h3>
+	        		<input type="text" name="business_name" value="<?php echo $opt->company_name; ?>" />
+	        		<h3>Business Address</h3>
+	        		<input type="text" name="business_address" value="<?php echo $opt->company_address; ?>"/>
+	        		<h3>Email Address</h3>
+	        		<input type="email" name="email_address" value="<?php echo $opt->company_email; ?>"/>
+	        		<h3>Currency</h3>
+	        		<select name="currency">
+						<option value="euro">Euro (&#128;)</option>
+						<option value="dollar">Dollar (&#x24;)</option>
+						<option value="pound">Sterling (&#xa3;)</option>
+						<option value="yen">Yen (&#xa5;)</option>
+					</select>
+	        		<h3>Template</h3>
+	    			<select name="template">
+	        			<option value="default">Block View</option>
+	        			<option value="list">List View</option>
+					</select>
 		        </div><!--//simp_ec_options_container -->
 	        <?php }
 	        }
@@ -50,7 +50,7 @@ function simp_ec_settings_page_html()
 					</select>
 	        		<h3>Template</h3>
 	    			<select name="template">
-	        			<option value="default">Default</option>
+	        			<option value="default">Block View</option>
 	        			<option value="list">List View</option>
 					</select>
 		        </div><!--//simp_ec_options_container -->

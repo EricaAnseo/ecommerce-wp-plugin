@@ -2,6 +2,7 @@
 // Template Name: Shop List Template
 get_header(); 
 $results = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . "simp_ec_product");
+$results_product_variable = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . 'simp_ec_product JOIN ' . $wpdb->prefix . 'simp_ec_product_variable ON ' . $wpdb->prefix . 'simp_ec_product_variable.product_id = ' . $wpdb->prefix . 'simp_ec_product.product_id JOIN ' . $wpdb->prefix . 'simp_ec_product_attribute ON ' . $wpdb->prefix . 'simp_ec_product_attribute.pattribute_id = ' . $wpdb->prefix . 'simp_ec_product_variable.pattribute_id');
 ?>
 
 <div id="primary" class="content-area simp_ec_shop_template">
@@ -38,7 +39,25 @@ $results = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . "simp_ec_produ
 							</p>
 						<?php } if(!empty($product->pdesc)) { ?>	
 							<span class="simp_ec_product_desc"><?php echo $product->pdesc; ?></span>
-						<?php } ?>
+						<?php } if($results_product_variable){	
+								
+								foreach($results_product_variable as $variable_product)
+								{	
+									if(!empty($variable_product->vproduct_id)) {
+									echo ' ';
+										if($variable_product->product_id == $product->product_id)
+										{
+											
+										 ?><span class="simp_ec_product_variation"> 
+										 	<strong> Variation: </strong>
+											<span class="simp_ec_product_variation<?php echo $variable_product->vproduct_id; ?>"><?php echo $variable_product->pattribute_name; ?> <strong>Stock:</strong> <?php echo $variable_product->vproduct_stock; ?></span>
+										</span>
+								<?php	}
+									echo '';
+									}
+								}
+								
+							} ?>
 					</span>
 			 	<?php } //foreach
 

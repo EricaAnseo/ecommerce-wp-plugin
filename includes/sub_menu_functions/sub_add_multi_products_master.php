@@ -97,7 +97,8 @@ function simp_ec_add_multiple_products_html()
 							'pname' => $pname[$i], 
 							'pdesc' => $pdesc[$i],
 							'pshortdesc' => $pshortdesc[$i],
-							'pprice' => $pprice[$i]);
+							'pprice' => $pprice[$i], 
+							'date_added' => current_time( 'mysql' ));
 
 					if (!empty($pname[$i]) || !empty($product_sku[$i]) || !empty($pdesc[$i]) || !empty($pshortdesc[$i]) || !empty($pprice[$i]))
 				    {

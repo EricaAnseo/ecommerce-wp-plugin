@@ -286,7 +286,7 @@ function simp_ec_shortcode_product ($atts)
 						<span class="simp_ec_product_type">
 							<?php foreach ( $results_product_type as $product_type ){ 
 									if($product->ptype_id == $product_type->ptype_id){
-											echo $product_type->ptype_name;
+											echo $product_type->ptype_name . ' ';
 										}//if	
 		
 							 	} // foreach ?>

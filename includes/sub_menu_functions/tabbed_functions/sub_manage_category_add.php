@@ -76,8 +76,7 @@ if(isset($_POST['add_category_button']))
 			$query = array('pcat_id' => $pcat_id, 
 					'pcat_name' => $pcat_name[$i],
 					'pcat_slug' => $pcat_slug[$i],
-					'pcat_desc' => $pcat_desc[$i],
-					'pcat_url' => '');
+					'pcat_desc' => $pcat_desc[$i]);
 
 			if (!empty($pcat_name[$i]) || !empty($pcat_slug[$i]) || !empty($pcat_desc[$i]))
 		    {
